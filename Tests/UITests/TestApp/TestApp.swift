@@ -6,7 +6,7 @@
 // SPDX-License-Identifier: MIT
 //
 
-@testable import TemplatePackage
+@testable import HealthKitOnOMH
 import SwiftUI
 
 
@@ -14,7 +14,7 @@ import SwiftUI
 struct UITestsApp: App {
     var body: some Scene {
         WindowGroup {
-            Text(TemplatePackage().stanford)
+            Text(HealthKitOnOMH().stanford)
         }
     }
 }
