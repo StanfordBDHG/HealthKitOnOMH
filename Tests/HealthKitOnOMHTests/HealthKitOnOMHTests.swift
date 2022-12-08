@@ -6,9 +6,9 @@
 // SPDX-License-Identifier: MIT
 //
 
+import HealthKit
 @testable import HealthKitOnOMH
 import XCTest
-import HealthKit
 
 
 final class HealthKitOnOMHTests: XCTestCase {

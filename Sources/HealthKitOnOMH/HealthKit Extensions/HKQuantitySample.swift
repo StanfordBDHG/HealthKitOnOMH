@@ -33,13 +33,11 @@ extension HKQuantitySample {
             throw HealthKitOnOMHError.notSupported
         }
 
+        let value = self.quantity.doubleValue(for: HKUnit(from: unit))
+
         return HkQuantitySample<Double>(
             quantityType: self.quantityType.identifier,
-            unitValue: UnitValue<Double>(unit: unit,
-                                         value: self.quantity.doubleValue(
-                                            for: HKUnit(from: unit)
-                                         )
-                                        ),
+            unitValue: UnitValue<Double>(unit: unit, value: value),
             effectiveTimeFrame: TimeInterval(
                 startDateTime: self.startDate,
                 endDateTime: self.endDate
