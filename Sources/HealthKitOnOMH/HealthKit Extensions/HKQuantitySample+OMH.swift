@@ -7,10 +7,11 @@
 //
 
 import HealthKit
+import OMHModels
 
 
 extension HKQuantitySample {
-    func buildOMH() throws -> HkQuantitySample<Double> {
+    func buildOMH() throws -> HealthKitQuantitySample<Double> {
         var unit = ""
         switch self.quantityType {
         case HKQuantityType(.heartRate):
@@ -35,7 +36,7 @@ extension HKQuantitySample {
 
         let value = self.quantity.doubleValue(for: HKUnit(from: unit))
 
-        return HkQuantitySample<Double>(
+        return HealthKitQuantitySample<Double>(
             quantityType: self.quantityType.identifier,
             unitValue: UnitValue<Double>(unit: unit, value: value),
             effectiveTimeFrame: TimeInterval(

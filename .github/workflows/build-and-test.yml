@@ -20,7 +20,7 @@ jobs:
     name: Build and Test Swift Package
     uses: StanfordBDHG/.github/.github/workflows/build-and-test-xcodebuild-spm.yml@v1
     with:
-      scheme: HealthKitOnOMH
+      scheme: HealthKitOnOMH-Package
   build_and_test-uitests:
     name: Build and Test UITest App
     uses: StanfordBDHG/.github/.github/workflows/build-and-test-xcodebuild.yml@v1
