@@ -10,14 +10,14 @@ import HealthKit
 
 /// A HealthKit Quantity Sample that represents data using a single numerical value and unit.
 open class HealthKitQuantitySample<T>: Codable where T: Numeric, T: Codable {
-    public var quantityType: String?
-    public var unitValue: UnitValue<T>?
-    public var effectiveTimeFrame: TimeInterval?
+    public var quantityType: String
+    public var unitValue: UnitValue<T>
+    public var effectiveTimeFrame: TimeInterval
 
     public init (
-        quantityType: String? = nil,
-        unitValue: UnitValue<T>? = nil,
-        effectiveTimeFrame: TimeInterval? = nil
+        quantityType: String,
+        unitValue: UnitValue<T>,
+        effectiveTimeFrame: TimeInterval
     ) {
         self.quantityType = quantityType
         self.unitValue = unitValue
