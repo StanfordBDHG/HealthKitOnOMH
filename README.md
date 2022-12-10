@@ -31,7 +31,7 @@ This project is licensed under the MIT License. See [Licenses](https://github.co
 
 ## Contributors
 This project is developed as part of the Stanford Biodesign for Digital Health projects at Stanford.
-See [CONTRIBUTORS.md](https://github.com/StanfordBDHG/HealthKitOnOMH/tree/main/CONTRIBUTORS.md) for a full list of all HealthKitOnFHIR contributors.
+See [CONTRIBUTORS.md](https://github.com/StanfordBDHG/HealthKitOnOMH/tree/main/CONTRIBUTORS.md) for a full list of all HealthKitOnOMH contributors.
 
 
 ## Notices
