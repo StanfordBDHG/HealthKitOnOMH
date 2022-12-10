@@ -36,6 +36,6 @@ final class HealthKitOnOMHTests: XCTestCase {
 
         let omh = try heartRateSample.buildOMH()
 
-        XCTAssertEqual(120, omh.unitValue?.value)
+        XCTAssertEqual(120, omh.unitValue.value)
     }
 }
