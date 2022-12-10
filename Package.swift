@@ -17,11 +17,18 @@ let package = Package(
         .iOS(.v16)
     ],
     products: [
-        .library(name: "HealthKitOnOMH", targets: ["HealthKitOnOMH"])
+        .library(name: "HealthKitOnOMH", targets: ["HealthKitOnOMH"]),
+        .library(name: "OMHModels", targets: ["OMHModels"])
     ],
     targets: [
         .target(
-            name: "HealthKitOnOMH"
+            name: "HealthKitOnOMH",
+            dependencies: [
+                .target(name: "OMHModels")
+            ]
+        ),
+        .target(
+            name: "OMHModels"
         ),
         .testTarget(
             name: "HealthKitOnOMHTests",
