@@ -37,5 +37,20 @@ final class HealthKitOnOMHTests: XCTestCase {
         let omh = try heartRateSample.buildOMH()
 
         XCTAssertEqual(120, omh.unitValue.value)
+        XCTAssertEqual("count/min", omh.unitValue.unit)
+    }
+
+    func testBloodGlucose() throws {
+        let bloodGlucoseSample = HKQuantitySample(
+            type: HKQuantityType(.bloodGlucose),
+            quantity: HKQuantity(unit: HKUnit(from: "mg/dL"), doubleValue: 90),
+            start: try startDate,
+            end: try endDate
+        )
+
+        let omh = try bloodGlucoseSample.buildOMH()
+
+        XCTAssertEqual(90, omh.unitValue.value)
+        XCTAssertEqual("mg/dL", omh.unitValue.unit)
     }
 }
