@@ -27,11 +27,3 @@ jobs:
     with:
       xcodeprojname: Tests/UITests/UITests.xcodeproj
       scheme: TestApp
-  create-and-upload-coverage-report:
-    name: Create and Upload Coverage Report
-    needs: [build_and_test-spm, build_and_test-uitests]
-    uses: StanfordBDHG/.github/.github/workflows/create-and-upload-coverage-report.yml@v1
-    with:
-      coveragereports: HealthKitOnOMH.xcresult HealthKitOnOMH.xcresult
-    secrets:
-      token: ${{ secrets.CODECOV_TOKEN }}
