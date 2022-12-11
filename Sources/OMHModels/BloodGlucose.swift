@@ -8,7 +8,7 @@
 open class BloodGlucose: Codable {
     public var bloodGlucose: UnitValue<Double>
     public var effectiveTimeFrame: TimeInterval
-    public var specimenSource: String?
+    public var specimenSource: SpecimenSource?
     public var temporalRelationshipToMeal: TemporalRelationshipToMeal?
     public var temporalRelationshipToSleep: TemporalRelationshipToSleep?
     public var descriptiveStatistic: DescriptiveStatistic?
@@ -34,7 +34,7 @@ open class BloodGlucose: Codable {
             forKey: .effectiveTimeFrame
         )
         self.specimenSource = try container.decode(
-            String.self,
+            SpecimenSource.self,
             forKey: .specimenSource
         )
         self.temporalRelationshipToMeal = try container.decodeIfPresent(
@@ -54,7 +54,7 @@ open class BloodGlucose: Codable {
     public required init (
         bloodGlucose: UnitValue<Double>,
         effectiveTimeFrame: TimeInterval,
-        specimenSource: String? = nil,
+        specimenSource: SpecimenSource? = nil,
         temporalRelationshipToMeal: TemporalRelationshipToMeal? = nil,
         temporalRelationshipToSleep: TemporalRelationshipToSleep? = nil,
         descriptiveStatistic: DescriptiveStatistic? = nil
