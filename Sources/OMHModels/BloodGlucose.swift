@@ -11,7 +11,7 @@ open class BloodGlucose: Codable {
     public var specimenSource: String?
     public var temporalRelationshipToMeal: TemporalRelationshipToMeal?
     public var temporalRelationshipToSleep: TemporalRelationshipToSleep?
-    public var descriptiveStatistic: String?
+    public var descriptiveStatistic: DescriptiveStatistic?
 
     private enum CodingKeys: String, CodingKey {
         case bloodGlucose
@@ -46,7 +46,7 @@ open class BloodGlucose: Codable {
             forKey: .temporalRelationshipToSleep
         )
         self.descriptiveStatistic = try container.decodeIfPresent(
-            String.self,
+            DescriptiveStatistic.self,
             forKey: .descriptiveStatistic
         )
     }
@@ -57,7 +57,7 @@ open class BloodGlucose: Codable {
         specimenSource: String? = nil,
         temporalRelationshipToMeal: TemporalRelationshipToMeal? = nil,
         temporalRelationshipToSleep: TemporalRelationshipToSleep? = nil,
-        descriptiveStatistic: String? = nil
+        descriptiveStatistic: DescriptiveStatistic? = nil
     ) {
         self.bloodGlucose = bloodGlucose
         self.effectiveTimeFrame = effectiveTimeFrame
