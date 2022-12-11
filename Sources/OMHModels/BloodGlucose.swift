@@ -22,6 +22,22 @@ open class BloodGlucose: Codable {
     public var temporalRelationshipToSleep: TemporalRelationshipToSleep?
     public var descriptiveStatistic: DescriptiveStatistic?
 
+    public required init (
+        bloodGlucose: UnitValue<Double>,
+        effectiveTimeFrame: TimeInterval,
+        specimenSource: SpecimenSource? = nil,
+        temporalRelationshipToMeal: TemporalRelationshipToMeal? = nil,
+        temporalRelationshipToSleep: TemporalRelationshipToSleep? = nil,
+        descriptiveStatistic: DescriptiveStatistic? = nil
+    ) {
+        self.bloodGlucose = bloodGlucose
+        self.effectiveTimeFrame = effectiveTimeFrame
+        self.specimenSource = specimenSource
+        self.temporalRelationshipToMeal = temporalRelationshipToMeal
+        self.temporalRelationshipToSleep = temporalRelationshipToSleep
+        self.descriptiveStatistic = descriptiveStatistic
+    }
+
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
@@ -50,23 +66,6 @@ open class BloodGlucose: Codable {
             forKey: .descriptiveStatistic
         )
     }
-
-    public required init (
-        bloodGlucose: UnitValue<Double>,
-        effectiveTimeFrame: TimeInterval,
-        specimenSource: SpecimenSource? = nil,
-        temporalRelationshipToMeal: TemporalRelationshipToMeal? = nil,
-        temporalRelationshipToSleep: TemporalRelationshipToSleep? = nil,
-        descriptiveStatistic: DescriptiveStatistic? = nil
-    ) {
-        self.bloodGlucose = bloodGlucose
-        self.effectiveTimeFrame = effectiveTimeFrame
-        self.specimenSource = specimenSource
-        self.temporalRelationshipToMeal = temporalRelationshipToMeal
-        self.temporalRelationshipToSleep = temporalRelationshipToSleep
-        self.descriptiveStatistic = descriptiveStatistic
-    }
-    
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)

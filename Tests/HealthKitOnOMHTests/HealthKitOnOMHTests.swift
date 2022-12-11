@@ -34,7 +34,7 @@ final class HealthKitOnOMHTests: XCTestCase {
             end: try endDate
         )
 
-        let omh = try heartRateSample.buildOMH()
+        let omh = try heartRateSample.buildOMHDataPoint()
 
         XCTAssertEqual(120, omh.unitValue.value)
         XCTAssertEqual("count/min", omh.unitValue.unit)
@@ -45,10 +45,11 @@ final class HealthKitOnOMHTests: XCTestCase {
             type: HKQuantityType(.bloodGlucose),
             quantity: HKQuantity(unit: HKUnit(from: "mg/dL"), doubleValue: 90),
             start: try startDate,
-            end: try endDate
+            end: try endDate,
+            metadata: [HKMetadataKeyBloodGlucoseMealTime: 1]
         )
 
-        let omh = try bloodGlucoseSample.buildOMH()
+        let omh = try bloodGlucoseSample.buildOMHDataPoint()
 
         XCTAssertEqual(90, omh.unitValue.value)
         XCTAssertEqual("mg/dL", omh.unitValue.unit)

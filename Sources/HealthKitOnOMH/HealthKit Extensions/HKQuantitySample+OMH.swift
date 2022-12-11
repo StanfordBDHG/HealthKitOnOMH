@@ -11,7 +11,7 @@ import OMHModels
 
 
 extension HKQuantitySample {
-    func buildOMH() throws -> HealthKitQuantitySample<Double> {
+    func buildOMHDataPoint() throws -> HealthKitQuantitySample<Double> {
         var unit = ""
         switch self.quantityType {
         case HKQuantityType(.heartRate):
