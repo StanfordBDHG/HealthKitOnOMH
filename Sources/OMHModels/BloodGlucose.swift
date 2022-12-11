@@ -5,7 +5,7 @@
 //
 // SPDX-License-Identifier: MIT
 
-open class BloodGlucose: OMHSchema {
+open class BloodGlucose: Schema {
     private enum CodingKeys: String, CodingKey {
         case bloodGlucose
         case effectiveTimeFrame
@@ -15,7 +15,6 @@ open class BloodGlucose: OMHSchema {
         case descriptiveStatistic
     }
 
-    public var schemaId = SchemaId(namespace: .omh, name: "blood-glucose", version: "3.0")
     public var bloodGlucose: UnitValue<Double>
     public var effectiveTimeFrame: TimeInterval
     public var specimenSource: SpecimenSource?
@@ -37,6 +36,7 @@ open class BloodGlucose: OMHSchema {
         self.temporalRelationshipToMeal = temporalRelationshipToMeal
         self.temporalRelationshipToSleep = temporalRelationshipToSleep
         self.descriptiveStatistic = descriptiveStatistic
+        super.init(schemaId: SchemaId(namespace: .omh, name: "blood-glucose", version: "3.0"))
     }
 
     public required init(from decoder: Decoder) throws {
@@ -66,6 +66,7 @@ open class BloodGlucose: OMHSchema {
             DescriptiveStatistic.self,
             forKey: .descriptiveStatistic
         )
+        super.init(schemaId: SchemaId(namespace: .omh, name: "blood-glucose", version: "3.0"))
     }
 
     public func encode(to encoder: Encoder) throws {

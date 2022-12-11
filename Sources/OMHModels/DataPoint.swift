@@ -6,7 +6,15 @@
 // SPDX-License-Identifier: MIT
 
 
-open class DataPoint<T: OMHSchema>: Codable {
+open class DataPoint<T: Schema> {
     public var header: Header
     public var body: T
+
+    public init (
+        header: Header,
+        body: T
+    ) {
+        self.header = header
+        self.body = body
+    }
 }

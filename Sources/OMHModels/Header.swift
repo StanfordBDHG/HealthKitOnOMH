@@ -12,5 +12,17 @@ open class Header: Codable {
     public var id: String
     public var creationDateTime: Date
     public var schemaId: SchemaId
-    public var acquisitionProvenance: String?
+    public var acquisitionProvenance: AcquisitionProvenance?
+
+    public init (
+        id: String,
+        creationDateTime: Date,
+        schemaId: SchemaId,
+        acquisitionProvenance: AcquisitionProvenance? = nil
+    ) {
+        self.id = id
+        self.creationDateTime = creationDateTime
+        self.schemaId = schemaId
+        self.acquisitionProvenance = acquisitionProvenance
+    }
 }

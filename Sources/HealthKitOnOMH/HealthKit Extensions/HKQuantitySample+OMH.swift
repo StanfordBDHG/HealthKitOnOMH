@@ -11,13 +11,35 @@ import OMHModels
 
 
 extension HKQuantitySample {
-    func buildOMHDataPoint() throws -> HealthKitQuantitySample<Double> {
+    func buildBloodGlucoseDataPoint() throws -> DataPoint<BloodGlucose> {
+        let body = BloodGlucose(
+            bloodGlucose: UnitValue<Double>(
+                unit: "mg/dL",
+                value: self.quantity.doubleValue(for: HKUnit(from: "mg/dL"))
+            ),
+            effectiveTimeFrame: TimeInterval(
+                startDateTime: self.startDate,
+                endDateTime: self.endDate
+            )
+        )
+
+        let header = Header(
+            id: self.uuid.uuidString,
+            creationDateTime: Date(),
+            schemaId: body.schemaId
+        )
+
+        return DataPoint<BloodGlucose>(
+            header: header,
+            body: body
+        )
+    }
+
+    func buildHKQuantityDataPoint() throws -> DataPoint<HealthKitQuantitySample<Double>> {
         var unit = ""
         switch self.quantityType {
         case HKQuantityType(.heartRate):
             unit = "count/min"
-        case HKQuantityType(.bloodGlucose):
-            unit = "mg/dL"
         case HKQuantityType(.bodyMass):
             unit = "kg"
         case HKQuantityType(.bodyTemperature):
@@ -36,13 +58,24 @@ extension HKQuantitySample {
 
         let value = self.quantity.doubleValue(for: HKUnit(from: unit))
 
-        return HealthKitQuantitySample<Double>(
+        let body = HealthKitQuantitySample<Double>(
             quantityType: self.quantityType.identifier,
             unitValue: UnitValue<Double>(unit: unit, value: value),
             effectiveTimeFrame: TimeInterval(
                 startDateTime: self.startDate,
                 endDateTime: self.endDate
             )
+        )
+
+        let header = Header(
+            id: self.uuid.uuidString,
+            creationDateTime: Date(),
+            schemaId: body.schemaId
+        )
+
+        return DataPoint<HealthKitQuantitySample>(
+            header: header,
+            body: body
         )
     }
 }

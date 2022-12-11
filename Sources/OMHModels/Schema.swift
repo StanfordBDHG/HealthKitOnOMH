@@ -6,6 +6,10 @@
 // SPDX-License-Identifier: MIT
 
 
-public protocol OMHSchema: Codable {
-    var schemaId: SchemaId { get }
+open class Schema {
+    public var schemaId: SchemaId
+
+    public init(schemaId: SchemaId) {
+        self.schemaId = schemaId
+    }
 }

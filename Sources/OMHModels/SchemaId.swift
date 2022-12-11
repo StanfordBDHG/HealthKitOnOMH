@@ -11,9 +11,7 @@ open class SchemaId: Codable {
     public var name: String
     public var version: String
 
-    public var description: String {
-        return "\(namespace.rawValue):\(name):\(version))"
-    }
+    public var description: String { "\(namespace.rawValue):\(name):\(version))" }
 
     public init (
         namespace: SchemaNamespace,
