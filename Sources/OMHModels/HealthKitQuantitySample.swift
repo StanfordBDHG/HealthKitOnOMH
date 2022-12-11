@@ -9,7 +9,8 @@
 import HealthKit
 
 /// A HealthKit Quantity Sample that represents data using a single numerical value and unit.
-open class HealthKitQuantitySample<T>: Codable where T: Numeric, T: Codable {
+open class HealthKitQuantitySample<T>: OMHSchema where T: Numeric, T: Codable {
+    public var schemaId = SchemaId(namespace: .omh, name: "heart-rate", version: "2.0")
     public var quantityType: String
     public var unitValue: UnitValue<T>
     public var effectiveTimeFrame: TimeInterval

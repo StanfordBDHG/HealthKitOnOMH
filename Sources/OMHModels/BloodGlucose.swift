@@ -5,7 +5,7 @@
 //
 // SPDX-License-Identifier: MIT
 
-open class BloodGlucose: Codable {
+open class BloodGlucose: OMHSchema {
     private enum CodingKeys: String, CodingKey {
         case bloodGlucose
         case effectiveTimeFrame
@@ -15,6 +15,7 @@ open class BloodGlucose: Codable {
         case descriptiveStatistic
     }
 
+    public var schemaId = SchemaId(namespace: .omh, name: "blood-glucose", version: "3.0")
     public var bloodGlucose: UnitValue<Double>
     public var effectiveTimeFrame: TimeInterval
     public var specimenSource: SpecimenSource?
