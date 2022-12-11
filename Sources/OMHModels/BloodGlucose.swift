@@ -6,13 +6,6 @@
 // SPDX-License-Identifier: MIT
 
 open class BloodGlucose: Codable {
-    public var bloodGlucose: UnitValue<Double>
-    public var effectiveTimeFrame: TimeInterval
-    public var specimenSource: SpecimenSource?
-    public var temporalRelationshipToMeal: TemporalRelationshipToMeal?
-    public var temporalRelationshipToSleep: TemporalRelationshipToSleep?
-    public var descriptiveStatistic: DescriptiveStatistic?
-
     private enum CodingKeys: String, CodingKey {
         case bloodGlucose
         case effectiveTimeFrame
@@ -21,6 +14,13 @@ open class BloodGlucose: Codable {
         case temporalRelationshipToSleep
         case descriptiveStatistic
     }
+
+    public var bloodGlucose: UnitValue<Double>
+    public var effectiveTimeFrame: TimeInterval
+    public var specimenSource: SpecimenSource?
+    public var temporalRelationshipToMeal: TemporalRelationshipToMeal?
+    public var temporalRelationshipToSleep: TemporalRelationshipToSleep?
+    public var descriptiveStatistic: DescriptiveStatistic?
 
     public required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -66,6 +66,7 @@ open class BloodGlucose: Codable {
         self.temporalRelationshipToSleep = temporalRelationshipToSleep
         self.descriptiveStatistic = descriptiveStatistic
     }
+    
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
