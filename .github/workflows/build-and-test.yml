@@ -21,15 +21,23 @@ jobs:
     uses: StanfordBDHG/.github/.github/workflows/build-and-test-xcodebuild-spm.yml@v1
     with:
       scheme: HealthKitOnOMH-Package
-   build_and_test-uitests:
-     name: Build and Test UITest App
-     uses: StanfordBDHG/.github/.github/workflows/build-and-test-xcodebuild.yml@v1
-     with:
-       xcodeprojname: Tests/UITests/UITests.xcodeproj
-       scheme: TestApp
-   create-and-upload-coverage-report:
-     name: Create and Upload Coverage Report
-     needs: [build_and_test-spm, build_and_test-uitests]
-     uses: StanfordBDHG/.github/.github/workflows/create-and-upload-coverage-report.yml@v1
-     with:
-       coveragereports: HealthKitOnOMH-Package.xcresult TestApp.xcresult
+  create-and-upload-coverage-report:
+    name: Create and Upload Coverage Report
+    needs: build_and_test-spm
+    runs-on: macos-12
+    steps:
+    - uses: actions/checkout@v3
+    - uses: maxim-lobanov/setup-xcode@v1
+      with:
+        xcode-version: latest-stable
+    - name: Check Environment
+      run: |
+          xcodebuild -version
+          swift --version
+    - uses: actions/download-artifact@v3
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        fail_ci_if_error: true
+        xcode: true
+        xcode_archive_path: HealthKitOnOMH-Package.xcresult
