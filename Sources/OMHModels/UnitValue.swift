@@ -8,9 +8,12 @@
 
 
 /// Represents a numerical value with a unit of measure.
-/// Allowed units are drawn from HL7's UCUM (Unified Code for Units of Measure).
+/// Generated from Open mHealth `omh:unit-value:1.0` (https://www.openmhealth.org/documentation/#/schema-docs/schema-library/schemas/omh_unit-value)
 public struct UnitValue<T>: Codable where T: Numeric & Codable {
+    /// String representing a unit drawn from UCUM (Unified Code for Units of Measure).
     public var unit: String
+
+    /// A numeric value
     public var value: T
     
     

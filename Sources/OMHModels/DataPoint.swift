@@ -6,6 +6,8 @@
 // SPDX-License-Identifier: MIT
 
 
+/// A protocol for an Open mHealth data point container
+/// Generated from Open mHealth `omh:data-point:1.0` (https://www.openmhealth.org/documentation/#/schema-docs/schema-library/schemas/omh_data-point)
 public protocol DataPoint<Body>: Sendable {
     associatedtype Body: Schema
     

@@ -8,9 +8,13 @@
 
 import Foundation
 
-/// An interval of time with a specified start and end time
+/// This schema describes an interval of time.
+/// Generated from Open mHealth `omh:time-interval:1.0` (https://www.openmhealth.org/documentation/#/schema-docs/schema-library/schemas/omh_time-interval)
 public struct TimeInterval: Codable {
+    /// The start timestamp of this interval
     public var startDateTime: Date
+
+    /// The end timestamp of this interval
     public var endDateTime: Date
     
     

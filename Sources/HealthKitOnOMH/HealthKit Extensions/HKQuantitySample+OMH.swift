@@ -11,6 +11,7 @@ import HealthKit
 
 
 extension HKQuantitySample {
+    /// The OMH data point created from converting this HKQuantitySample
     public var dataPoint: any DataPoint {
         get throws {
             let schema: any Schema

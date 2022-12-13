@@ -6,6 +6,7 @@
 // SPDX-License-Identifier: MIT
 
 
+/// A protocol for an Open mHealth schema
 public protocol Schema: Codable {
     static var schemaId: SchemaId { get }
 }

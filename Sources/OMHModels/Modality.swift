@@ -6,6 +6,7 @@
 // SPDX-License-Identifier: MIT
 
 
+/// The modality whereby the measure is obtained.
 public enum Modality: String, Sendable, Codable {
     case sensed = "sensed"
     case selfReported = "self-reported"
