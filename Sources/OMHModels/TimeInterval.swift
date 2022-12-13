@@ -8,7 +8,7 @@
 
 import Foundation
 
-
+/// An interval of time with a specified start and end time
 public struct TimeInterval: Codable {
     public var startDateTime: Date
     public var endDateTime: Date

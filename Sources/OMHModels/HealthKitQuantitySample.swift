@@ -9,7 +9,7 @@
 
 /// A HealthKit Quantity Sample that represents data using a single numerical value and unit.
 public struct HealthKitQuantitySample<T>: Schema where T: Numeric & Codable {
-    static public var schemaId: SchemaId {
+    public static var schemaId: SchemaId {
         SchemaId(namespace: .granola, name: "hk-quantity-sample", version: "1.0")
     }
     
