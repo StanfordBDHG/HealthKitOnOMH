@@ -9,4 +9,5 @@
 public enum SchemaNamespace: String, Sendable, Codable {
     case ieee
     case omh
+    case granola
 }
