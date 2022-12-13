@@ -6,7 +6,7 @@
 // SPDX-License-Identifier: MIT
 
 
-public struct SchemaId: Sendable, Codable {
+public struct SchemaId: Sendable, Codable, CustomStringConvertible {
     public var namespace: SchemaNamespace
     public var name: String
     public var version: String
