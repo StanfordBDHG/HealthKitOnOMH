@@ -6,15 +6,10 @@
 // SPDX-License-Identifier: MIT
 
 
-open class DataPoint<T: Schema> {
-    public var header: Header
-    public var body: T
-
-    public init (
-        header: Header,
-        body: T
-    ) {
-        self.header = header
-        self.body = body
-    }
+public protocol DataPoint<Body>: Sendable {
+    associatedtype Body: Schema
+    
+    
+    var header: Header { get }
+    var body: Body { get set }
 }

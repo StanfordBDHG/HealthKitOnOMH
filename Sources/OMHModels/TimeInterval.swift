@@ -8,10 +8,12 @@
 
 import Foundation
 
-open class TimeInterval: Codable {
+
+public struct TimeInterval: Codable {
     public var startDateTime: Date
     public var endDateTime: Date
-
+    
+    
     public init (
         startDateTime: Date,
         endDateTime: Date

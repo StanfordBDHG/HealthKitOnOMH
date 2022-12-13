@@ -6,13 +6,17 @@
 // SPDX-License-Identifier: MIT
 
 
-open class SchemaId: Codable {
+public struct SchemaId: Sendable, Codable {
     public var namespace: SchemaNamespace
     public var name: String
     public var version: String
-
-    public var description: String { "\(namespace.rawValue):\(name):\(version))" }
-
+    
+    
+    public var description: String {
+        "\(namespace.rawValue):\(name):\(version))"
+    }
+    
+    
     public init (
         namespace: SchemaNamespace,
         name: String,

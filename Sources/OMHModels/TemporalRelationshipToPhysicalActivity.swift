@@ -6,6 +6,7 @@
 // SPDX-License-Identifier: MIT
 //
 
+
 /// Represents the temporal relationship of a clinical measure or assessment to physical activity.
 public enum TemporalRelationshipToPhysicalActivity: String, Codable {
     case atRest = "at rest"

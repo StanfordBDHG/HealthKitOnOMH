@@ -7,35 +7,35 @@
 //
 
 import HealthKit
-import OMHModels
+@_exported import OMHModels
 
 
 extension HKQuantitySample {
-    func buildBloodGlucoseDataPoint() throws -> DataPoint<BloodGlucose> {
-        let body = BloodGlucose(
-            bloodGlucose: UnitValue<Double>(
-                unit: "mg/dL",
-                value: self.quantity.doubleValue(for: HKUnit(from: "mg/dL"))
-            ),
-            effectiveTimeFrame: TimeInterval(
-                startDateTime: self.startDate,
-                endDateTime: self.endDate
-            )
-        )
-
-        let header = Header(
-            id: self.uuid.uuidString,
-            creationDateTime: Date(),
-            schemaId: body.schemaId
-        )
-
-        return DataPoint<BloodGlucose>(
-            header: header,
-            body: body
-        )
+    public var dataPoint: any DataPoint {
+        get throws {
+            let schema: any Schema
+            switch sampleType {
+            case HKQuantityType(.bloodGlucose):
+                schema = BloodGlucose(
+                    bloodGlucose: UnitValue<Double>(
+                        unit: "mg/dL",
+                        value: self.quantity.doubleValue(for: HKUnit(from: "mg/dL"))
+                    ),
+                    effectiveTimeFrame: TimeInterval(
+                        startDateTime: self.startDate,
+                        endDateTime: self.endDate
+                    )
+                )
+            default:
+                return try buildHKQuantityDataPoint()
+            }
+            
+            return createTypedDataPoint(schema)
+        }
     }
-
-    func buildHKQuantityDataPoint() throws -> DataPoint<HealthKitQuantitySample<Double>> {
+    
+    
+    private func buildHKQuantityDataPoint() throws -> any DataPoint {
         var unit = ""
         switch self.quantityType {
         case HKQuantityType(.heartRate):
@@ -57,8 +57,8 @@ extension HKQuantitySample {
         }
 
         let value = self.quantity.doubleValue(for: HKUnit(from: unit))
-
-        let body = HealthKitQuantitySample<Double>(
+        
+        let sample = HealthKitQuantitySample<Double>(
             quantityType: self.quantityType.identifier,
             unitValue: UnitValue<Double>(unit: unit, value: value),
             effectiveTimeFrame: TimeInterval(
@@ -67,14 +67,16 @@ extension HKQuantitySample {
             )
         )
 
-        let header = Header(
-            id: self.uuid.uuidString,
-            creationDateTime: Date(),
-            schemaId: body.schemaId
-        )
-
-        return DataPoint<HealthKitQuantitySample>(
-            header: header,
+        return createTypedDataPoint(sample)
+    }
+    
+    private func createTypedDataPoint<T: Schema>(_ body: T) -> any DataPoint {
+        SchemaDataPoint<T>(
+            header: Header(
+                id: self.uuid.uuidString,
+                creationDateTime: Date(),
+                schemaId: type(of: body).schemaId
+            ),
             body: body
         )
     }

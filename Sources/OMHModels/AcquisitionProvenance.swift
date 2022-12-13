@@ -5,11 +5,22 @@
 //
 // SPDX-License-Identifier: MIT
 
-
 import Foundation
 
-open class AcquisitionProvenance: Codable {
+
+public struct AcquisitionProvenance: Sendable, Codable {
     public var sourceName: String
     public var sourceCreationDateTime: Date?
     public var modality: Modality?
+    
+    
+    init(
+        sourceName: String,
+        sourceCreationDateTime: Date? = nil,
+        modality: Modality? = nil
+    ) {
+        self.sourceName = sourceName
+        self.sourceCreationDateTime = sourceCreationDateTime
+        self.modality = modality
+    }
 }

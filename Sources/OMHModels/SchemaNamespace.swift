@@ -6,7 +6,7 @@
 // SPDX-License-Identifier: MIT
 
 
-public enum SchemaNamespace: String, Codable {
+public enum SchemaNamespace: String, Sendable, Codable {
     case ieee
     case omh
 }

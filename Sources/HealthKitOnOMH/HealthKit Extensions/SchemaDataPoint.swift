@@ -6,7 +6,7 @@
 // SPDX-License-Identifier: MIT
 
 
-public enum Modality: String, Sendable, Codable {
-    case sensed = "sensed"
-    case selfReported = "self-reported"
+struct SchemaDataPoint<T: Schema & Sendable>: DataPoint {
+    var header: Header
+    var body: T
 }

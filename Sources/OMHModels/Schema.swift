@@ -6,10 +6,6 @@
 // SPDX-License-Identifier: MIT
 
 
-open class Schema {
-    public var schemaId: SchemaId
-
-    public init(schemaId: SchemaId) {
-        self.schemaId = schemaId
-    }
+public protocol Schema: Codable {
+    static var schemaId: SchemaId { get }
 }

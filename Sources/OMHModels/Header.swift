@@ -5,15 +5,16 @@
 //
 // SPDX-License-Identifier: MIT
 
-
 import Foundation
 
-open class Header: Codable {
+
+public struct Header: Codable, Sendable {
     public var id: String
     public var creationDateTime: Date
     public var schemaId: SchemaId
     public var acquisitionProvenance: AcquisitionProvenance?
-
+    
+    
     public init (
         id: String,
         creationDateTime: Date,
