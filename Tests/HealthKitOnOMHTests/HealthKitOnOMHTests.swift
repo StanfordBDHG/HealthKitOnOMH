@@ -18,14 +18,14 @@ final class HealthKitOnOMHTests: XCTestCase {
             return try XCTUnwrap(Calendar.current.date(from: dateComponents))
         }
     }
-
+    
     var endDate: Date {
         get throws {
             let dateComponents = DateComponents(year: 1891, month: 10, day: 1, hour: 12, minute: 0, second: 42)
             return try XCTUnwrap(Calendar.current.date(from: dateComponents))
         }
     }
-
+    
     func testHeartRate() throws {
         let heartRateSample = HKQuantitySample(
             type: HKQuantityType(.heartRate),
@@ -33,13 +33,13 @@ final class HealthKitOnOMHTests: XCTestCase {
             start: try startDate,
             end: try endDate
         )
-
-        let omh = try heartRateSample.buildOMHDataPoint()
-
-        XCTAssertEqual(120, omh.unitValue.value)
-        XCTAssertEqual("count/min", omh.unitValue.unit)
+        
+        let omhDataPoint = try XCTUnwrap(heartRateSample.dataPoint as? any DataPoint<HealthKitQuantitySample<Double>>)
+        
+        XCTAssertEqual(120, omhDataPoint.body.unitValue.value)
+        XCTAssertEqual("count/min", omhDataPoint.body.unitValue.unit)
     }
-
+    
     func testBloodGlucose() throws {
         let bloodGlucoseSample = HKQuantitySample(
             type: HKQuantityType(.bloodGlucose),
@@ -48,10 +48,10 @@ final class HealthKitOnOMHTests: XCTestCase {
             end: try endDate,
             metadata: [HKMetadataKeyBloodGlucoseMealTime: 1]
         )
-
-        let omh = try bloodGlucoseSample.buildOMHDataPoint()
-
-        XCTAssertEqual(90, omh.unitValue.value)
-        XCTAssertEqual("mg/dL", omh.unitValue.unit)
+        
+        let omhDataPoint = try XCTUnwrap(bloodGlucoseSample.dataPoint as? any DataPoint<BloodGlucose>)
+        
+        XCTAssertEqual(90, omhDataPoint.body.bloodGlucose.value)
+        XCTAssertEqual("mg/dL", omhDataPoint.body.bloodGlucose.unit)
     }
 }

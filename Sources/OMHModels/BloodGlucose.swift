@@ -5,24 +5,33 @@
 //
 // SPDX-License-Identifier: MIT
 
-open class BloodGlucose: Codable {
-    private enum CodingKeys: String, CodingKey {
-        case bloodGlucose
-        case effectiveTimeFrame
-        case specimenSource
-        case temporalRelationshipToMeal
-        case temporalRelationshipToSleep
-        case descriptiveStatistic
-    }
-
+/// A Blood Glucose's measurement
+/// Generated from Open mHealth `omh:blood-glucose:30` (https://www.openmhealth.org/documentation/#/schema-docs/schema-library/schemas/omh_blood-glucose)
+public struct BloodGlucose: Schema {
+    /// The Open mHealth schema identifier
+    public static let schemaId = SchemaId(namespace: .omh, name: "blood-glucose", version: "3.0")
+    
+    /// The blood glucose measurement as a `UnitValue` containing a double value and a unit
     public var bloodGlucose: UnitValue<Double>
-    public var effectiveTimeFrame: TimeInterval
-    public var specimenSource: SpecimenSource?
-    public var temporalRelationshipToMeal: TemporalRelationshipToMeal?
-    public var temporalRelationshipToSleep: TemporalRelationshipToSleep?
-    public var descriptiveStatistic: DescriptiveStatistic?
 
-    public required init (
+    /// The time interval corresponding to this measurement
+    public var effectiveTimeFrame: TimeInterval
+
+    /// The type of specimen this measurement was made on (e.g. capillary blood)
+    public var specimenSource: SpecimenSource?
+
+    /// The relationship of this measurement to meals (e.g. before breakfast)
+    public var temporalRelationshipToMeal: TemporalRelationshipToMeal?
+
+    /// The relationship of this measurement to sleep (e.g. on waking)
+    public var temporalRelationshipToSleep: TemporalRelationshipToSleep?
+
+    /// If the value in this data point is a descriptive statistic rather than a single measurement (e.g. minimum, average, median)
+    /// this property should contain the specific type of descriptive statistic
+    public var descriptiveStatistic: DescriptiveStatistic?
+    
+    
+    public init (
         bloodGlucose: UnitValue<Double>,
         effectiveTimeFrame: TimeInterval,
         specimenSource: SpecimenSource? = nil,
@@ -36,45 +45,5 @@ open class BloodGlucose: Codable {
         self.temporalRelationshipToMeal = temporalRelationshipToMeal
         self.temporalRelationshipToSleep = temporalRelationshipToSleep
         self.descriptiveStatistic = descriptiveStatistic
-    }
-
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-
-        self.bloodGlucose = try container.decode(
-            UnitValue<Double>.self,
-            forKey: .bloodGlucose
-        )
-        self.effectiveTimeFrame = try container.decode(
-            TimeInterval.self,
-            forKey: .effectiveTimeFrame
-        )
-        self.specimenSource = try container.decode(
-            SpecimenSource.self,
-            forKey: .specimenSource
-        )
-        self.temporalRelationshipToMeal = try container.decodeIfPresent(
-            TemporalRelationshipToMeal.self,
-            forKey: .temporalRelationshipToMeal
-        )
-        self.temporalRelationshipToSleep = try container.decodeIfPresent(
-            TemporalRelationshipToSleep.self,
-            forKey: .temporalRelationshipToSleep
-        )
-        self.descriptiveStatistic = try container.decodeIfPresent(
-            DescriptiveStatistic.self,
-            forKey: .descriptiveStatistic
-        )
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-
-        try container.encode(bloodGlucose, forKey: .bloodGlucose)
-        try container.encode(effectiveTimeFrame, forKey: .effectiveTimeFrame)
-        try container.encodeIfPresent(specimenSource, forKey: .specimenSource)
-        try container.encodeIfPresent(temporalRelationshipToMeal, forKey: .temporalRelationshipToMeal)
-        try container.encodeIfPresent(temporalRelationshipToSleep, forKey: .temporalRelationshipToSleep)
-        try container.encodeIfPresent(descriptiveStatistic, forKey: .descriptiveStatistic)
     }
 }

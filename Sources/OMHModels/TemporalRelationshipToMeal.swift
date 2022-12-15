@@ -7,7 +7,8 @@
 //
 
 
-/// Represents the temporal relationship of a clinical measure or assessment to meals
+/// Represents the temporal relationship of a clinical measure or assessment to meals (e.g., fasting, after lunch).
+/// Generated from Open mHealth `omh:temporal-relationship-to-meal:1.2` (https://www.openmhealth.org/documentation/#/schema-docs/schema-library/schemas/omh_temporal-relationship-to-meal)
 public enum TemporalRelationshipToMeal: String, Codable {
     case fasting = "fasting"
     case notFasting = "not fasting"

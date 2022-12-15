@@ -8,10 +8,16 @@
 
 import Foundation
 
-open class TimeInterval: Codable {
+/// This schema describes an interval of time.
+/// Generated from Open mHealth `omh:time-interval:1.0` (https://www.openmhealth.org/documentation/#/schema-docs/schema-library/schemas/omh_time-interval)
+public struct TimeInterval: Codable {
+    /// The start timestamp of this interval
     public var startDateTime: Date
-    public var endDateTime: Date
 
+    /// The end timestamp of this interval
+    public var endDateTime: Date
+    
+    
     public init (
         startDateTime: Date,
         endDateTime: Date

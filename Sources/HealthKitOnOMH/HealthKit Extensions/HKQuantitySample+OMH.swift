@@ -7,17 +7,40 @@
 //
 
 import HealthKit
-import OMHModels
+@_exported import OMHModels
 
 
 extension HKQuantitySample {
-    func buildOMHDataPoint() throws -> HealthKitQuantitySample<Double> {
+    /// The OMH data point created from converting this HKQuantitySample
+    public var dataPoint: any DataPoint {
+        get throws {
+            let schema: any Schema
+            switch sampleType {
+            case HKQuantityType(.bloodGlucose):
+                schema = BloodGlucose(
+                    bloodGlucose: UnitValue<Double>(
+                        unit: "mg/dL",
+                        value: self.quantity.doubleValue(for: HKUnit(from: "mg/dL"))
+                    ),
+                    effectiveTimeFrame: TimeInterval(
+                        startDateTime: self.startDate,
+                        endDateTime: self.endDate
+                    )
+                )
+            default:
+                return try buildHKQuantityDataPoint()
+            }
+            
+            return createTypedDataPoint(schema)
+        }
+    }
+    
+    
+    private func buildHKQuantityDataPoint() throws -> any DataPoint {
         var unit = ""
         switch self.quantityType {
         case HKQuantityType(.heartRate):
             unit = "count/min"
-        case HKQuantityType(.bloodGlucose):
-            unit = "mg/dL"
         case HKQuantityType(.bodyMass):
             unit = "kg"
         case HKQuantityType(.bodyTemperature):
@@ -35,14 +58,27 @@ extension HKQuantitySample {
         }
 
         let value = self.quantity.doubleValue(for: HKUnit(from: unit))
-
-        return HealthKitQuantitySample<Double>(
+        
+        let sample = HealthKitQuantitySample<Double>(
             quantityType: self.quantityType.identifier,
             unitValue: UnitValue<Double>(unit: unit, value: value),
             effectiveTimeFrame: TimeInterval(
                 startDateTime: self.startDate,
                 endDateTime: self.endDate
             )
+        )
+
+        return createTypedDataPoint(sample)
+    }
+    
+    private func createTypedDataPoint<T: Schema>(_ body: T) -> any DataPoint {
+        SchemaDataPoint<T>(
+            header: Header(
+                id: self.uuid.uuidString,
+                creationDateTime: Date(),
+                schemaId: type(of: body).schemaId
+            ),
+            body: body
         )
     }
 }

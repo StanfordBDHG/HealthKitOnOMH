@@ -6,7 +6,9 @@
 // SPDX-License-Identifier: MIT
 //
 
-/// Represents the temporal relationship of a clinical measure or assessment to physical activity.
+
+/// This schema represents the temporal relationship of a clinical measure or assessment to physical activity (e.g., at rest, during exercise).
+/// Generated from Open mHealth `omh:temporal-relationship-to-physical-activity:1.0` (https://www.openmhealth.org/documentation/#/schema-docs/schema-library/schemas/omh_temporal-relationship-to-physical-activity)
 public enum TemporalRelationshipToPhysicalActivity: String, Codable {
     case atRest = "at rest"
     case active = "active"
