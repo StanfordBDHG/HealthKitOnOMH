@@ -27,6 +27,28 @@ extension HKQuantitySample {
                         endDateTime: self.endDate
                     )
                 )
+            case HKQuantityType(.heartRate):
+                schema = HeartRate(
+                    heartRate: UnitValue<Double>(
+                        unit: "beats/min",
+                        value: self.quantity.doubleValue(for: HKUnit(from: "bpm"))
+                    ),
+                    effectiveTimeFrame: TimeInterval(
+                        startDateTime: self.startDate,
+                        endDateTime: self.endDate
+                    )
+                )
+            case HKQuantityType(.stepCount):
+                schema = StepCount(
+                    stepCount: UnitValue<Double>(
+                        unit: "steps",
+                        value: self.quantity.doubleValue(for: HKUnit(from: "steps"))
+                    ),
+                    effectiveTimeFrame: TimeInterval(
+                        startDateTime: self.startDate,
+                        endDateTime: self.endDate
+                    )
+                )
             default:
                 return try buildHKQuantityDataPoint()
             }
