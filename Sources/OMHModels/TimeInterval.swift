@@ -31,9 +31,9 @@ public struct TimeInterval: Codable, Equatable, Comparable {
     }
     
     public static func <(lhs: TimeInterval, rhs: TimeInterval) -> Bool {
-        if lhs.startDateTime == rhs.startDateTime {
-            return lhs.endDateTime < rhs.endDateTime
+        if lhs.startDateTime != rhs.startDateTime {
+            return lhs.startDateTime < rhs.startDateTime
         }
-        return lhs.startDateTime < rhs.startDateTime
+        return lhs.endDateTime < rhs.endDateTime
     }
 }
