@@ -34,10 +34,10 @@ final class HealthKitOnOMHTests: XCTestCase {
             end: try endDate
         )
         
-        let omhDataPoint = try XCTUnwrap(heartRateSample.dataPoint as? any DataPoint<HealthKitQuantitySample<Double>>)
+        let omhDataPoint = try XCTUnwrap(heartRateSample.dataPoint as? any DataPoint<HeartRate>)
         
-        XCTAssertEqual(120, omhDataPoint.body.unitValue.value)
-        XCTAssertEqual("count/min", omhDataPoint.body.unitValue.unit)
+        XCTAssertEqual(120, omhDataPoint.body.heartRate.value)
+        XCTAssertEqual("beats/min", omhDataPoint.body.heartRate.unit)
     }
     
     func testBloodGlucose() throws {
@@ -53,5 +53,19 @@ final class HealthKitOnOMHTests: XCTestCase {
         
         XCTAssertEqual(90, omhDataPoint.body.bloodGlucose.value)
         XCTAssertEqual("mg/dL", omhDataPoint.body.bloodGlucose.unit)
+    }
+    
+    func testStepCount() throws {
+        let stepCountSample = HKQuantitySample(
+            type: HKQuantityType(.stepCount),
+            quantity: HKQuantity(unit: HKUnit(from: "count"), doubleValue: 100),
+            start: try startDate,
+            end: try endDate
+        )
+        
+        let omhDataPoint = try XCTUnwrap(stepCountSample.dataPoint as? any DataPoint<StepCount>)
+        
+        XCTAssertEqual(100, omhDataPoint.body.stepCount.value)
+        XCTAssertEqual("steps", omhDataPoint.body.stepCount.unit)
     }
 }

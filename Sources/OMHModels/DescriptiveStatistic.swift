@@ -6,7 +6,7 @@
 // SPDX-License-Identifier: MIT
 
 
-/// An enumeration representing different types of stastical measures that can be represented in data points
+/// An enumeration representing different types of statistical measures that can be represented in data points
 public enum DescriptiveStatistic: String, Codable {
     case average = "average"
     case count = "count"

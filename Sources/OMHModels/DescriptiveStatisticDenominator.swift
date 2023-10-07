@@ -6,12 +6,15 @@
 // SPDX-License-Identifier: MIT
 
 
+// swiftlint:disable identifier_name
+// We disable this rule because we must use case names as defined by Open mHealth.
+
 /// An enumeration representing the denominator of the descriptive statistic when the measure has an implicit duration.
 public enum DescriptiveStatisticDenominator: String, Codable {
-    case d = "d"
-    case wk = "wk"
-    case Mo = "Mo"
-    case episode = "episode"
-    case meal = "meal"
-    case session = "session"
+    case d
+    case wk
+    case Mo
+    case episode
+    case meal
+    case session
 }

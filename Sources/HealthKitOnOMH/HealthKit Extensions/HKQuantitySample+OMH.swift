@@ -31,7 +31,7 @@ extension HKQuantitySample {
                 schema = HeartRate(
                     heartRate: UnitValue<Double>(
                         unit: "beats/min",
-                        value: self.quantity.doubleValue(for: HKUnit(from: "bpm"))
+                        value: self.quantity.doubleValue(for: HKUnit(from: "count/min"))
                     ),
                     effectiveTimeFrame: TimeInterval(
                         startDateTime: self.startDate,
@@ -42,7 +42,7 @@ extension HKQuantitySample {
                 schema = StepCount(
                     stepCount: UnitValue<Double>(
                         unit: "steps",
-                        value: self.quantity.doubleValue(for: HKUnit(from: "steps"))
+                        value: self.quantity.doubleValue(for: HKUnit(from: "count"))
                     ),
                     effectiveTimeFrame: TimeInterval(
                         startDateTime: self.startDate,
@@ -61,8 +61,6 @@ extension HKQuantitySample {
     private func buildHKQuantityDataPoint() throws -> any DataPoint {
         var unit = ""
         switch self.quantityType {
-        case HKQuantityType(.heartRate):
-            unit = "count/min"
         case HKQuantityType(.bodyMass):
             unit = "kg"
         case HKQuantityType(.bodyTemperature):
@@ -73,8 +71,6 @@ extension HKQuantitySample {
             unit = "%"
         case HKQuantityType(.respiratoryRate):
             unit = "count/min"
-        case HKQuantityType(.stepCount):
-            unit = "count"
         default:
             throw HealthKitOnOMHError.notSupported
         }
