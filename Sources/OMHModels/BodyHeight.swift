@@ -5,14 +5,14 @@
 //
 // SPDX-License-Identifier: MIT
 
-/// A Body Weight measurement
-/// Generated from Open mHealth `omh:body-weight:2.0` (https://www.openmhealth.org/documentation/#/schema-docs/schema-library/schemas/omh_body-weight)
-public struct BodyWeight: Schema {
+/// A Body Height measurement
+/// Generated from Open mHealth `omh:body-height:1.0` (https://www.openmhealth.org/documentation/#/schema-docs/schema-library/schemas/omh_body-height)
+public struct BodyHeight: Schema {
     /// The Open mHealth schema identifier
-    public static let schemaId = SchemaId(namespace: .omh, name: "body-weight", version: "2.0")
+    public static let schemaId = SchemaId(namespace: .omh, name: "body-height", version: "1.0")
 
     /// The body weight measurement as a `UnitValue` containing a double value and unit
-    public var bodyWeight: UnitValue<Double>
+    public var bodyHeight: UnitValue<Double>
 
     /// The time interval corresponding to this measurement
     public var effectiveTimeFrame: TimeInterval
@@ -23,11 +23,11 @@ public struct BodyWeight: Schema {
 
 
     public init(
-        bodyWeight: UnitValue<Double>,
+        bodyHeight: UnitValue<Double>,
         effectiveTimeFrame: TimeInterval,
         descriptiveStatistic: DescriptiveStatistic? = nil
     ) {
-        self.bodyWeight = bodyWeight
+        self.bodyHeight = bodyHeight
         self.effectiveTimeFrame = effectiveTimeFrame
         self.descriptiveStatistic = descriptiveStatistic
     }

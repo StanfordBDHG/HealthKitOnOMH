@@ -59,6 +59,17 @@ extension HKQuantitySample {
                         endDateTime: self.endDate
                     )
                 )
+            case HKQuantityType(.height):
+                schema = BodyHeight(
+                    bodyHeight: UnitValue<Double>(
+                        unit: "cm",
+                        value: self.quantity.doubleValue(for: HKUnit(from: "cm"))
+                    ),
+                    effectiveTimeFrame: TimeInterval(
+                        startDateTime: self.startDate,
+                        endDateTime: self.endDate
+                    )
+                )
             default:
                 return try buildHKQuantityDataPoint()
             }

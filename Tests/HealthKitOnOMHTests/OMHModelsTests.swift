@@ -155,4 +155,25 @@ final class OMHModelsTests: XCTestCase {
 
         XCTAssertEqual(averageBodyWeight.descriptiveStatistic, .average)
     }
+
+    func testBodyHeight() throws {
+        let timeFrame = TimeInterval(startDateTime: try startDate, endDateTime: try endDate)
+
+        let simpleBodyHeight = BodyHeight(
+            bodyHeight: UnitValue(unit: "cm", value: 180),
+            effectiveTimeFrame: timeFrame
+        )
+
+        XCTAssertEqual(simpleBodyHeight.bodyHeight.value, 180)
+        XCTAssertEqual(simpleBodyHeight.bodyHeight.unit, "cm")
+        XCTAssertEqual(simpleBodyHeight.effectiveTimeFrame, timeFrame)
+
+        let averageBodyHeight = BodyHeight(
+            bodyHeight: UnitValue(unit: "cm", value: 200),
+            effectiveTimeFrame: timeFrame,
+            descriptiveStatistic: .maximum
+        )
+
+        XCTAssertEqual(averageBodyHeight.descriptiveStatistic, .maximum)
+    }
 }

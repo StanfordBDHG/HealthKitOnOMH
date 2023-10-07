@@ -68,4 +68,32 @@ final class HealthKitOnOMHTests: XCTestCase {
         XCTAssertEqual(100, omhDataPoint.body.stepCount.value)
         XCTAssertEqual("steps", omhDataPoint.body.stepCount.unit)
     }
+
+    func testBodyHeight() throws {
+        let bodyHeightSample = HKQuantitySample(
+            type: HKQuantityType(.height),
+            quantity: HKQuantity(unit: HKUnit(from: "cm"), doubleValue: 180),
+            start: try startDate,
+            end: try endDate
+        )
+
+        let omhDataPoint = try XCTUnwrap(bodyHeightSample.dataPoint as? any DataPoint<BodyHeight>)
+
+        XCTAssertEqual(180, omhDataPoint.body.bodyHeight.value)
+        XCTAssertEqual("cm", omhDataPoint.body.bodyHeight.unit)
+    }
+
+    func testBodyWeight() throws {
+        let bodyWeightSample = HKQuantitySample(
+            type: HKQuantityType(.bodyMass),
+            quantity: HKQuantity(unit: HKUnit(from: "kg"), doubleValue: 100),
+            start: try startDate,
+            end: try endDate
+        )
+
+        let omhDataPoint = try XCTUnwrap(bodyWeightSample.dataPoint as? any DataPoint<BodyWeight>)
+
+        XCTAssertEqual(100, omhDataPoint.body.bodyWeight.value)
+        XCTAssertEqual("kg", omhDataPoint.body.bodyWeight.unit)
+    }
 }
