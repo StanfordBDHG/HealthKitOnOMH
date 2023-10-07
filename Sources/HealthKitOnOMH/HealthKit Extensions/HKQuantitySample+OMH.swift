@@ -49,6 +49,16 @@ extension HKQuantitySample {
                         endDateTime: self.endDate
                     )
                 )
+            case HKQuantityType(.bodyMass):
+                schema = BodyWeight(
+                    bodyWeight: UnitValue<Double>(
+                        unit: "kg",
+                        value: self.quantity.doubleValue(for: HKUnit(from: "kg"))
+                    ), effectiveTimeFrame: TimeInterval(
+                        startDateTime: self.startDate,
+                        endDateTime: self.endDate
+                    )
+                )
             default:
                 return try buildHKQuantityDataPoint()
             }
@@ -61,8 +71,6 @@ extension HKQuantitySample {
     private func buildHKQuantityDataPoint() throws -> any DataPoint {
         var unit = ""
         switch self.quantityType {
-        case HKQuantityType(.bodyMass):
-            unit = "kg"
         case HKQuantityType(.bodyTemperature):
             unit = "degC"
         case HKQuantityType(.height):

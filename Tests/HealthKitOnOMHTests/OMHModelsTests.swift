@@ -134,4 +134,25 @@ final class OMHModelsTests: XCTestCase {
         XCTAssertEqual(averageStepCount.descriptiveStatistic, .average)
         XCTAssertEqual(averageStepCount.descriptiveStatisticDenominator, .d)
     }
+
+    func testBodyWeight() throws {
+        let timeFrame = TimeInterval(startDateTime: try startDate, endDateTime: try endDate)
+
+        let simpleBodyWeight = BodyWeight(
+            bodyWeight: UnitValue(unit: "kg", value: 100),
+            effectiveTimeFrame: timeFrame
+        )
+
+        XCTAssertEqual(simpleBodyWeight.bodyWeight.value, 100)
+        XCTAssertEqual(simpleBodyWeight.bodyWeight.unit, "kg")
+        XCTAssertEqual(simpleBodyWeight.effectiveTimeFrame, timeFrame)
+
+        let averageBodyWeight = BodyWeight(
+            bodyWeight: UnitValue(unit: "kg", value: 100),
+            effectiveTimeFrame: timeFrame,
+            descriptiveStatistic: .average
+        )
+
+        XCTAssertEqual(averageBodyWeight.descriptiveStatistic, .average)
+    }
 }
