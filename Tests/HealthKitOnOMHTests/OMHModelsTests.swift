@@ -176,4 +176,17 @@ final class OMHModelsTests: XCTestCase {
 
         XCTAssertEqual(averageBodyHeight.descriptiveStatistic, .maximum)
     }
+    
+    func testBodyTemperature() throws {
+        let timeFrame = TimeInterval(startDateTime: try startDate, endDateTime: try endDate)
+        
+        let simpleBodyTemperature = BodyTemperature(
+            bodyTemperature: UnitValue<Double>(unit: "C", value: 37),
+            effectiveTimeFrame: timeFrame
+        )
+        
+        XCTAssertEqual(simpleBodyTemperature.bodyTemperature.value, 37)
+        XCTAssertEqual(simpleBodyTemperature.bodyTemperature.unit, "C")
+        XCTAssertEqual(simpleBodyTemperature.effectiveTimeFrame, timeFrame)
+    }
 }

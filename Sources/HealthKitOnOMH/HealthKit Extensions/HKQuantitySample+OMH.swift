@@ -70,6 +70,17 @@ extension HKQuantitySample {
                         endDateTime: self.endDate
                     )
                 )
+            case HKQuantityType(.bodyTemperature):
+                schema = BodyTemperature(
+                    bodyTemperature: UnitValue<Double>(
+                        unit: "C",
+                        value: self.quantity.doubleValue(for: .degreeCelsius())
+                    ),
+                    effectiveTimeFrame: TimeInterval(
+                        startDateTime: self.startDate,
+                        endDateTime: self.endDate
+                    )
+                )
             default:
                 return try buildHKQuantityDataPoint()
             }
@@ -84,8 +95,6 @@ extension HKQuantitySample {
         switch self.quantityType {
         case HKQuantityType(.bodyTemperature):
             unit = "degC"
-        case HKQuantityType(.height):
-            unit = "m"
         case HKQuantityType(.oxygenSaturation):
             unit = "%"
         case HKQuantityType(.respiratoryRate):

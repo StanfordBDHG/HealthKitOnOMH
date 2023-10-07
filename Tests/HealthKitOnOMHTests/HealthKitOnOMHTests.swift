@@ -96,4 +96,17 @@ final class HealthKitOnOMHTests: XCTestCase {
         XCTAssertEqual(100, omhDataPoint.body.bodyWeight.value)
         XCTAssertEqual("kg", omhDataPoint.body.bodyWeight.unit)
     }
+    
+    func testBodyTemperature() throws {
+        let bodyTemperatureSample = HKQuantitySample(
+            type: HKQuantityType(.bodyTemperature),
+            quantity: HKQuantity(unit: .degreeCelsius(), doubleValue: 37),
+            start: try startDate,
+            end: try endDate
+        )
+        
+        let omhDataPoint = try XCTUnwrap(bodyTemperatureSample.dataPoint as? any DataPoint<BodyTemperature>)
+        
+        XCTAssertEqual(37, omhDataPoint.body.bodyTemperature.value)
+    }
 }
