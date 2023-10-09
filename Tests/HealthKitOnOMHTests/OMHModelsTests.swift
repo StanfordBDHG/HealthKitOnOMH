@@ -33,7 +33,7 @@ final class OMHModelsTests: XCTestCase {
 
     func testBloodGlucose() throws {
         let beforeBreakfastGlucose = BloodGlucose(
-            bloodGlucose: UnitValue(unit: "mg/dL", value: 80),
+            bloodGlucose: BloodGlucoseUnitValue(unit: .milligramsPerDeciliter, value: 80),
             effectiveTimeFrame: try timeFrame,
             specimenSource: SpecimenSource.capillaryBlood,
             temporalRelationshipToMeal: TemporalRelationshipToMeal.beforeBreakfast
@@ -45,7 +45,7 @@ final class OMHModelsTests: XCTestCase {
         XCTAssertEqual(beforeBreakfastGlucose.effectiveTimeFrame, try timeFrame)
 
         let duringSleepBloodGlucose = BloodGlucose(
-            bloodGlucose: UnitValue(unit: "mg/dL", value: 70),
+            bloodGlucose: BloodGlucoseUnitValue(unit: .milligramsPerDeciliter, value: 70),
             effectiveTimeFrame: try timeFrame,
             specimenSource: SpecimenSource.capillaryBlood,
             temporalRelationshipToSleep: TemporalRelationshipToSleep.duringSleep
@@ -57,7 +57,7 @@ final class OMHModelsTests: XCTestCase {
         XCTAssertEqual(duringSleepBloodGlucose.effectiveTimeFrame, try timeFrame)
 
         let averageBloodGlucose = BloodGlucose(
-            bloodGlucose: UnitValue(unit: "mg/dL", value: 120),
+            bloodGlucose: BloodGlucoseUnitValue(unit: .milligramsPerDeciliter, value: 120),
             effectiveTimeFrame: try timeFrame,
             descriptiveStatistic: DescriptiveStatistic.average
         )

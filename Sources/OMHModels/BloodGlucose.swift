@@ -13,7 +13,7 @@ public struct BloodGlucose: Schema {
     public static let schemaId = SchemaId(namespace: .omh, name: "blood-glucose", version: "3.0")
     
     /// The blood glucose measurement as a `UnitValue` containing a double value and a unit
-    public var bloodGlucose: UnitValue<Double>
+    public var bloodGlucose: BloodGlucoseUnitValue
 
     /// The time frame corresponding to this measurement
     public var effectiveTimeFrame: TimeFrame
@@ -33,7 +33,7 @@ public struct BloodGlucose: Schema {
     
     
     public init (
-        bloodGlucose: UnitValue<Double>,
+        bloodGlucose: BloodGlucoseUnitValue,
         effectiveTimeFrame: TimeFrame,
         specimenSource: SpecimenSource? = nil,
         temporalRelationshipToMeal: TemporalRelationshipToMeal? = nil,

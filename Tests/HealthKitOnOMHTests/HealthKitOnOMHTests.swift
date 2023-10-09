@@ -52,7 +52,7 @@ final class HealthKitOnOMHTests: XCTestCase {
         let omhDataPoint = try XCTUnwrap(bloodGlucoseSample.dataPoint as? any DataPoint<BloodGlucose>)
         
         XCTAssertEqual(90, omhDataPoint.body.bloodGlucose.value)
-        XCTAssertEqual("mg/dL", omhDataPoint.body.bloodGlucose.unit)
+        XCTAssertEqual(BloodGlucoseUnit.milligramsPerDeciliter, omhDataPoint.body.bloodGlucose.unit)
     }
     
     func testStepCount() throws {

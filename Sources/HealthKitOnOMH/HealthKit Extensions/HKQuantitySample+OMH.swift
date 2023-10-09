@@ -26,8 +26,8 @@ extension HKQuantitySample {
             switch sampleType {
             case HKQuantityType(.bloodGlucose):
                 schema = BloodGlucose(
-                    bloodGlucose: UnitValue<Double>(
-                        unit: "mg/dL",
+                    bloodGlucose: BloodGlucoseUnitValue(
+                        unit: .milligramsPerDeciliter,
                         value: self.quantity.doubleValue(for: HKUnit(from: "mg/dL"))
                     ),
                     effectiveTimeFrame: timeFrame

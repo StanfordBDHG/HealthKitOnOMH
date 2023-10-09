@@ -8,8 +8,9 @@
 import Foundation
 
 
+/// A type representing a value paired with a unit specific to heart rate measurements
+public typealias HeartRateUnitValue = TypedUnitValue<HeartRateUnit>
+
 public enum HeartRateUnit: String, UnitProtocol {
     case beatsPerMinute = "beats/min"
 }
-
-public typealias HeartRateUnitValue = TypedUnitValue<HeartRateUnit>
