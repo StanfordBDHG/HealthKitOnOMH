@@ -8,6 +8,7 @@
 
 import Foundation
 
+
 /// Enables a particular time frame to be described as either a point in time or a time interval.
 /// Generated from Open mHealth `omh:time-frame:1.0` (https://www.openmhealth.org/documentation/#/schema-docs/schema-library/schemas/omh_time-frame)
 public struct TimeFrame: Codable, Equatable {

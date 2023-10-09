@@ -5,6 +5,7 @@
 //
 // SPDX-License-Identifier: MIT
 
+
 /// The namespace of a schema, which serves to disambiguate schemas with conflicting names.
 public enum SchemaNamespace: String, Sendable, Codable {
     case ieee

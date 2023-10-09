@@ -8,6 +8,7 @@
 
 import Foundation
 
+
 /// Generated from Open mHealth `omh:duration-unit-value:1.0` (https://www.openmhealth.org/documentation/#/schema-docs/schema-library/schemas/omh_duration-unit-value)
 public struct DurationUnitValue: Codable, Equatable {
     public var unit: TimeUnit

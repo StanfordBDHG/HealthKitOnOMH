@@ -5,6 +5,7 @@
 //
 // SPDX-License-Identifier: MIT
 
+
 /// A Body Weight measurement
 /// Generated from Open mHealth `omh:body-weight:2.0` (https://www.openmhealth.org/documentation/#/schema-docs/schema-library/schemas/omh_body-weight)
 public struct BodyWeight: Schema {

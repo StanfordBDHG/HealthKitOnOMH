@@ -5,6 +5,7 @@
 //
 // SPDX-License-Identifier: MIT
 
+
 /// A Blood Glucose measurement
 /// Generated from Open mHealth `omh:blood-glucose:3.0` (https://www.openmhealth.org/documentation/#/schema-docs/schema-library/schemas/omh_blood-glucose)
 public struct BloodGlucose: Schema {

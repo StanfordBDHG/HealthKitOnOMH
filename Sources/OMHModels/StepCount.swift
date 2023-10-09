@@ -6,6 +6,8 @@
 // SPDX-License-Identifier: MIT
 
 
+/// A Step Count measurement
+/// Generated from Open mHealth `omh:step-count:3.0` (https://www.openmhealth.org/documentation/#/schema-docs/schema-library/schemas/omh_step-count)
 public struct StepCount: Schema {
     /// The Open mHealth schema identifier
     public static let schemaId = SchemaId(namespace: .omh, name: "step-count", version: "3.0")

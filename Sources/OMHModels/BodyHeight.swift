@@ -5,6 +5,7 @@
 //
 // SPDX-License-Identifier: MIT
 
+
 /// A Body Height measurement
 /// Generated from Open mHealth `omh:body-height:1.0` (https://www.openmhealth.org/documentation/#/schema-docs/schema-library/schemas/omh_body-height)
 public struct BodyHeight: Schema {

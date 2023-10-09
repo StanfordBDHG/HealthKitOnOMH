@@ -6,6 +6,9 @@
 // SPDX-License-Identifier: MIT
 
 
+
+/// A Heart Rate measurement
+/// Generated from Open mHealth `omh:heart-rate:2.0` (https://www.openmhealth.org/documentation/#/schema-docs/schema-library/schemas/omh_heart-rate)
 public struct HeartRate: Schema {
     /// The Open mHealth schema identifier
     public static let schemaId = SchemaId(namespace: .omh, name: "heart-rate", version: "2.0")

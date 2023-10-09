@@ -7,6 +7,7 @@
 
 import Foundation
 
+
 /// This schema represents the header of a data point.
 /// Generated from Open mHealth omh:header:1.2 (https://www.openmhealth.org/documentation/#/schema-docs/schema-library/schemas/omh_header)
 public struct Header: Codable, Sendable {
