@@ -34,8 +34,8 @@ extension HKQuantitySample {
                 )
             case HKQuantityType(.heartRate):
                 schema = HeartRate(
-                    heartRate: UnitValue<Double>(
-                        unit: "beats/min",
+                    heartRate: HeartRateUnitValue(
+                        unit: .beatsPerMinute,
                         value: self.quantity.doubleValue(for: HKUnit(from: "count/min"))
                     ),
                     effectiveTimeFrame: timeFrame

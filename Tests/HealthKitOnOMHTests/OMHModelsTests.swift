@@ -69,7 +69,7 @@ final class OMHModelsTests: XCTestCase {
     
     func testHeartRate() throws {
         let heartRateOnWaking = HeartRate(
-            heartRate: UnitValue(unit: "beats/min", value: 50),
+            heartRate: HeartRateUnitValue(unit: .beatsPerMinute, value: 50),
             effectiveTimeFrame: try timeFrame,
             temporalRelationshipToSleep: .onWaking
         )
@@ -78,7 +78,7 @@ final class OMHModelsTests: XCTestCase {
         XCTAssertEqual(heartRateOnWaking.temporalRelationshipToSleep, TemporalRelationshipToSleep.onWaking)
         
         let heartRateWithActivity = HeartRate(
-            heartRate: UnitValue(unit: "beats/min", value: 120),
+            heartRate: HeartRateUnitValue(unit: .beatsPerMinute, value: 120),
             effectiveTimeFrame: try timeFrame,
             temporalRelationshipToPhysicalActivity: .duringExercise
         )
@@ -88,7 +88,7 @@ final class OMHModelsTests: XCTestCase {
         XCTAssertEqual(heartRateWithActivity.effectiveTimeFrame, try timeFrame)
 
         let heartRateWithDescriptiveStatistics = HeartRate(
-            heartRate: UnitValue(unit: "beats/min", value: 50),
+            heartRate: HeartRateUnitValue(unit: .beatsPerMinute, value: 50),
             effectiveTimeFrame: try timeFrame,
             descriptiveStatistic: .minimum
         )

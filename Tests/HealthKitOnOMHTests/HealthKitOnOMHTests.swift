@@ -37,7 +37,7 @@ final class HealthKitOnOMHTests: XCTestCase {
         let omhDataPoint = try XCTUnwrap(heartRateSample.dataPoint as? any DataPoint<HeartRate>)
         
         XCTAssertEqual(120, omhDataPoint.body.heartRate.value)
-        XCTAssertEqual("beats/min", omhDataPoint.body.heartRate.unit)
+        XCTAssertEqual(HeartRateUnit.beatsPerMinute, omhDataPoint.body.heartRate.unit)
     }
     
     func testBloodGlucose() throws {

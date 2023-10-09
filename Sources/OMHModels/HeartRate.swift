@@ -13,7 +13,7 @@ public struct HeartRate: Schema {
     public static let schemaId = SchemaId(namespace: .omh, name: "heart-rate", version: "2.0")
     
     /// The heart rate measurement as a `UnitValue` containing a double value and unit
-    public var heartRate: UnitValue<Double>
+    public var heartRate: HeartRateUnitValue
     
     /// The time frame corresponding to this measurement
     public var effectiveTimeFrame: TimeFrame
@@ -30,7 +30,7 @@ public struct HeartRate: Schema {
     
     
     public init(
-        heartRate: UnitValue<Double>,
+        heartRate: HeartRateUnitValue,
         effectiveTimeFrame: TimeFrame,
         temporalRelationshipToSleep: TemporalRelationshipToSleep? = nil,
         temporalRelationshipToPhysicalActivity: TemporalRelationshipToPhysicalActivity? = nil,
