@@ -124,4 +124,18 @@ final class HealthKitOnOMHTests: XCTestCase {
         XCTAssertEqual(20, omhDataPoint.body.respiratoryRate.value)
         XCTAssertEqual(RespiratoryRateUnit.breathsPerMinute, omhDataPoint.body.respiratoryRate.unit)
     }
+    
+    func testOxygenSaturation() throws {
+        let oxygenSaturationSample = HKQuantitySample(
+            type: HKQuantityType(.oxygenSaturation),
+            quantity: HKQuantity(unit: HKUnit.percent(), doubleValue: 99),
+            start: try startDate,
+            end: try endDate
+        )
+        
+        let omhDataPoint = try XCTUnwrap(oxygenSaturationSample.dataPoint as? any DataPoint<OxygenSaturation>)
+        
+        XCTAssertEqual(99, omhDataPoint.body.oxygenSaturation.value)
+        XCTAssertEqual(OxygenSaturationUnit.percent, omhDataPoint.body.oxygenSaturation.unit)
+    }
 }

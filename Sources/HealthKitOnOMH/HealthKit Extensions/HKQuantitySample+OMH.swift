@@ -63,11 +63,19 @@ extension HKQuantitySample {
                     ),
                     effectiveTimeFrame: timeFrame
                 )
+            case HKQuantityType(.oxygenSaturation):
+                schema = OxygenSaturation(
+                    oxygenSaturation: OxygenSaturationUnitValue(
+                        unit: .percent,
+                        value: self.quantity.doubleValue(for: HKUnit.percent())
+                    ),
+                    effectiveTimeFrame: timeFrame
+                )
             case HKQuantityType(.respiratoryRate):
                 schema = RespiratoryRate(
                     respiratoryRate: RespiratoryRateUnitValue(
                         unit: .breathsPerMinute,
-                        value: self.quantity.doubleValue(for: HKUnit.count().unitDivided(by: .minute()))
+                        value: self.quantity.doubleValue(for: HKUnit(from: "count/min"))
                     ),
                     effectiveTimeFrame: timeFrame
                 )
@@ -80,38 +88,11 @@ extension HKQuantitySample {
                     effectiveTimeFrame: timeFrame
                 )
             default:
-                return try buildHKQuantityDataPoint()
+                throw HealthKitOnOMHError.notSupported
             }
             
             return createTypedDataPoint(schema)
         }
-    }
-    
-    private func buildHKQuantityDataPoint() throws -> any DataPoint {
-        var unit = ""
-        switch self.quantityType {
-        case HKQuantityType(.oxygenSaturation):
-            unit = "%"
-        default:
-            throw HealthKitOnOMHError.notSupported
-        }
-
-        let value = self.quantity.doubleValue(for: HKUnit(from: unit))
-
-        let timeFrame = TimeFrame(
-            timeInterval: TimeInterval(
-                startDateTime: self.startDate,
-                endDateTime: self.endDate
-            )
-        )
-
-        let sample = HealthKitQuantitySample(
-            quantityType: self.quantityType.identifier,
-            unitValue: HealthKitUnitValue(unit: HealthKitUnit(unit: unit), value: value),
-            effectiveTimeFrame: timeFrame
-        )
-
-        return createTypedDataPoint(sample)
     }
     
     private func createTypedDataPoint<T: Schema>(_ body: T) -> any DataPoint {
