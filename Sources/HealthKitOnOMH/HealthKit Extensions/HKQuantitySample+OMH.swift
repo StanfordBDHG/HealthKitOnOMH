@@ -42,8 +42,8 @@ extension HKQuantitySample {
                 )
             case HKQuantityType(.stepCount):
                 schema = StepCount(
-                    stepCount: UnitValue<Double>(
-                        unit: "steps",
+                    stepCount: StepCountUnitValue(
+                        unit: .steps,
                         value: self.quantity.doubleValue(for: HKUnit(from: "count"))
                     ),
                     effectiveTimeFrame: timeFrame
@@ -65,8 +65,8 @@ extension HKQuantitySample {
                 )
             case HKQuantityType(.bodyTemperature):
                 schema = BodyTemperature(
-                    bodyTemperature: UnitValue<Double>(
-                        unit: "C",
+                    bodyTemperature: TemperatureUnitValue(
+                        unit: .C,
                         value: self.quantity.doubleValue(for: .degreeCelsius())
                     ),
                     effectiveTimeFrame: timeFrame

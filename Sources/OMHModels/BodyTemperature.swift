@@ -13,7 +13,7 @@ public struct BodyTemperature: Schema {
     public static let schemaId = SchemaId(namespace: .omh, name: "body-temperature", version: "3.0")
     
     /// The body temperature measurement as a `UnitValue` containing a double value and a unit
-    public var bodyTemperature: UnitValue<Double>
+    public var bodyTemperature: TemperatureUnitValue
     
     /// The time frame corresponding to this measurement
     public var effectiveTimeFrame: TimeFrame
@@ -24,7 +24,7 @@ public struct BodyTemperature: Schema {
     
     
     public init(
-        bodyTemperature: UnitValue<Double>,
+        bodyTemperature: TemperatureUnitValue,
         effectiveTimeFrame: TimeFrame,
         descriptiveStatistic: DescriptiveStatistic? = nil
     ) {

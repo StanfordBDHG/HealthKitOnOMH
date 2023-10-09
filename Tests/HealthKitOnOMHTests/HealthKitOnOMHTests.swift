@@ -66,7 +66,7 @@ final class HealthKitOnOMHTests: XCTestCase {
         let omhDataPoint = try XCTUnwrap(stepCountSample.dataPoint as? any DataPoint<StepCount>)
         
         XCTAssertEqual(100, omhDataPoint.body.stepCount.value)
-        XCTAssertEqual("steps", omhDataPoint.body.stepCount.unit)
+        XCTAssertEqual(.steps, omhDataPoint.body.stepCount.unit)
     }
 
     func testBodyHeight() throws {
@@ -108,5 +108,6 @@ final class HealthKitOnOMHTests: XCTestCase {
         let omhDataPoint = try XCTUnwrap(bodyTemperatureSample.dataPoint as? any DataPoint<BodyTemperature>)
         
         XCTAssertEqual(37, omhDataPoint.body.bodyTemperature.value)
+        XCTAssertEqual(TemperatureUnit.C, omhDataPoint.body.bodyTemperature.unit)
     }
 }

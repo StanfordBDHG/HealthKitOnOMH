@@ -13,7 +13,7 @@ public struct StepCount: Schema {
     public static let schemaId = SchemaId(namespace: .omh, name: "step-count", version: "3.0")
     
     /// The step count measurement as a `UnitValue` containing a double value and a unit
-    public var stepCount: UnitValue<Double>
+    public var stepCount: StepCountUnitValue
     
     /// The time frame corresponding to this measurement
     public var effectiveTimeFrame: TimeFrame
@@ -27,7 +27,7 @@ public struct StepCount: Schema {
     
     
     public init (
-        stepCount: UnitValue<Double>,
+        stepCount: StepCountUnitValue,
         effectiveTimeFrame: TimeFrame,
         descriptiveStatistic: DescriptiveStatistic? = nil,
         descriptiveStatisticDenominator: DescriptiveStatisticDenominator? = nil

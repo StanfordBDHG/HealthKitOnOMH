@@ -100,7 +100,7 @@ final class OMHModelsTests: XCTestCase {
     
     func testStepCount() throws {
      let simpleStepCount = StepCount(
-            stepCount: UnitValue(unit: "count", value: 5000),
+        stepCount: StepCountUnitValue(unit: .steps, value: 5000),
             effectiveTimeFrame: try timeFrame
         )
         
@@ -110,7 +110,7 @@ final class OMHModelsTests: XCTestCase {
         XCTAssertNil(simpleStepCount.descriptiveStatisticDenominator)
         
         let averageStepCount = StepCount(
-            stepCount: UnitValue(unit: "count", value: 6500),
+            stepCount: StepCountUnitValue(unit: .steps, value: 6500),
             effectiveTimeFrame: try timeFrame,
             descriptiveStatistic: .average,
             descriptiveStatisticDenominator: .d
@@ -162,12 +162,12 @@ final class OMHModelsTests: XCTestCase {
     
     func testBodyTemperature() throws {
         let simpleBodyTemperature = BodyTemperature(
-            bodyTemperature: UnitValue<Double>(unit: "C", value: 37),
+            bodyTemperature: TemperatureUnitValue(unit: .C, value: 37),
             effectiveTimeFrame: try timeFrame
         )
         
         XCTAssertEqual(simpleBodyTemperature.bodyTemperature.value, 37)
-        XCTAssertEqual(simpleBodyTemperature.bodyTemperature.unit, "C")
+        XCTAssertEqual(simpleBodyTemperature.bodyTemperature.unit, TemperatureUnit.C)
         XCTAssertEqual(simpleBodyTemperature.effectiveTimeFrame, try timeFrame)
     }
 }
