@@ -11,13 +11,14 @@ import Foundation
 /// Enables a particular time frame to be described as either a point in time or a time interval.
 /// Generated from Open mHealth `omh:time-frame:1.0` (https://www.openmhealth.org/documentation/#/schema-docs/schema-library/schemas/omh_time-frame)
 public struct TimeFrame: Codable, Equatable {
-    public let dateTime: DateTime?
-    public let timeInterval: TimeInterval?
-
     enum CodingKeys: String, CodingKey {
         case dateTime = "date_time"
         case timeInterval = "time_interval"
     }
+
+    public let dateTime: DateTime?
+    public let timeInterval: TimeInterval?
+
 
     public init(dateTime: DateTime) {
         self.dateTime = dateTime
@@ -40,6 +41,10 @@ public struct TimeFrame: Codable, Equatable {
         }
     }
 
+    public static func == (lhs: TimeFrame, rhs: TimeFrame) -> Bool {
+        lhs.dateTime == rhs.dateTime && lhs.timeInterval == rhs.timeInterval
+    }
+
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         if let dateTime = dateTime {
@@ -47,9 +52,5 @@ public struct TimeFrame: Codable, Equatable {
         } else if let timeInterval = timeInterval {
             try container.encode(timeInterval, forKey: .timeInterval)
         }
-    }
-
-    public static func == (lhs: TimeFrame, rhs: TimeFrame) -> Bool {
-        return lhs.dateTime == rhs.dateTime && lhs.timeInterval == rhs.timeInterval
     }
 }
