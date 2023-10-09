@@ -13,9 +13,9 @@ public struct HeartRate: Schema {
     /// The heart rate measurement as a `UnitValue` containing a double value and unit
     public var heartRate: UnitValue<Double>
     
-    /// The time interval corresponding to this measurement
-    public var effectiveTimeFrame: TimeInterval
-    
+    /// The time frame corresponding to this measurement
+    public var effectiveTimeFrame: TimeFrame
+
     /// The relationship of this measurement to sleep (e.g. on waking)
     public var temporalRelationshipToSleep: TemporalRelationshipToSleep?
     
@@ -29,7 +29,7 @@ public struct HeartRate: Schema {
     
     public init(
         heartRate: UnitValue<Double>,
-        effectiveTimeFrame: TimeInterval,
+        effectiveTimeFrame: TimeFrame,
         temporalRelationshipToSleep: TemporalRelationshipToSleep? = nil,
         temporalRelationshipToPhysicalActivity: TemporalRelationshipToPhysicalActivity? = nil,
         descriptiveStatistic: DescriptiveStatistic? = nil

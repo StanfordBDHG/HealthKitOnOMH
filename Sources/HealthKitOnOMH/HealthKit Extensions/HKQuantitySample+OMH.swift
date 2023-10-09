@@ -15,6 +15,14 @@ extension HKQuantitySample {
     public var dataPoint: any DataPoint {
         get throws {
             let schema: any Schema
+
+            let timeFrame = TimeFrame(
+                timeInterval: TimeInterval(
+                    startDateTime: self.startDate,
+                    endDateTime: self.endDate
+                )
+            )
+
             switch sampleType {
             case HKQuantityType(.bloodGlucose):
                 schema = BloodGlucose(
@@ -22,10 +30,7 @@ extension HKQuantitySample {
                         unit: "mg/dL",
                         value: self.quantity.doubleValue(for: HKUnit(from: "mg/dL"))
                     ),
-                    effectiveTimeFrame: TimeInterval(
-                        startDateTime: self.startDate,
-                        endDateTime: self.endDate
-                    )
+                    effectiveTimeFrame: timeFrame
                 )
             case HKQuantityType(.heartRate):
                 schema = HeartRate(
@@ -33,10 +38,7 @@ extension HKQuantitySample {
                         unit: "beats/min",
                         value: self.quantity.doubleValue(for: HKUnit(from: "count/min"))
                     ),
-                    effectiveTimeFrame: TimeInterval(
-                        startDateTime: self.startDate,
-                        endDateTime: self.endDate
-                    )
+                    effectiveTimeFrame: timeFrame
                 )
             case HKQuantityType(.stepCount):
                 schema = StepCount(
@@ -44,20 +46,14 @@ extension HKQuantitySample {
                         unit: "steps",
                         value: self.quantity.doubleValue(for: HKUnit(from: "count"))
                     ),
-                    effectiveTimeFrame: TimeInterval(
-                        startDateTime: self.startDate,
-                        endDateTime: self.endDate
-                    )
+                    effectiveTimeFrame: timeFrame
                 )
             case HKQuantityType(.bodyMass):
                 schema = BodyWeight(
                     bodyWeight: UnitValue<Double>(
                         unit: "kg",
                         value: self.quantity.doubleValue(for: HKUnit(from: "kg"))
-                    ), effectiveTimeFrame: TimeInterval(
-                        startDateTime: self.startDate,
-                        endDateTime: self.endDate
-                    )
+                    ), effectiveTimeFrame: timeFrame
                 )
             case HKQuantityType(.height):
                 schema = BodyHeight(
@@ -65,10 +61,7 @@ extension HKQuantitySample {
                         unit: "cm",
                         value: self.quantity.doubleValue(for: HKUnit(from: "cm"))
                     ),
-                    effectiveTimeFrame: TimeInterval(
-                        startDateTime: self.startDate,
-                        endDateTime: self.endDate
-                    )
+                    effectiveTimeFrame: timeFrame
                 )
             case HKQuantityType(.bodyTemperature):
                 schema = BodyTemperature(
@@ -76,10 +69,7 @@ extension HKQuantitySample {
                         unit: "C",
                         value: self.quantity.doubleValue(for: .degreeCelsius())
                     ),
-                    effectiveTimeFrame: TimeInterval(
-                        startDateTime: self.startDate,
-                        endDateTime: self.endDate
-                    )
+                    effectiveTimeFrame: timeFrame
                 )
             default:
                 return try buildHKQuantityDataPoint()
@@ -104,14 +94,18 @@ extension HKQuantitySample {
         }
 
         let value = self.quantity.doubleValue(for: HKUnit(from: unit))
-        
-        let sample = HealthKitQuantitySample<Double>(
-            quantityType: self.quantityType.identifier,
-            unitValue: UnitValue<Double>(unit: unit, value: value),
-            effectiveTimeFrame: TimeInterval(
+
+        let timeFrame = TimeFrame(
+            timeInterval: TimeInterval(
                 startDateTime: self.startDate,
                 endDateTime: self.endDate
             )
+        )
+
+        let sample = HealthKitQuantitySample<Double>(
+            quantityType: self.quantityType.identifier,
+            unitValue: UnitValue<Double>(unit: unit, value: value),
+            effectiveTimeFrame: timeFrame
         )
 
         return createTypedDataPoint(sample)

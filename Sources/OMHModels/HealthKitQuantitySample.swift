@@ -21,14 +21,14 @@ public struct HealthKitQuantitySample<T>: Schema where T: Numeric & Codable {
     /// The associated UnitValue for this HealthKitQuantitySample
     public var unitValue: UnitValue<T>
 
-    /// The associated TimeInterval for this HealthKitQuantitySample
-    public var effectiveTimeFrame: TimeInterval
-    
+    /// The associated time frame for this HealthKitQuantitySample
+    public var effectiveTimeFrame: TimeFrame
+
     
     public init (
         quantityType: String,
         unitValue: UnitValue<T>,
-        effectiveTimeFrame: TimeInterval
+        effectiveTimeFrame: TimeFrame
     ) {
         self.quantityType = quantityType
         self.unitValue = unitValue

@@ -14,8 +14,8 @@ public struct BloodGlucose: Schema {
     /// The blood glucose measurement as a `UnitValue` containing a double value and a unit
     public var bloodGlucose: UnitValue<Double>
 
-    /// The time interval corresponding to this measurement
-    public var effectiveTimeFrame: TimeInterval
+    /// The time frame corresponding to this measurement
+    public var effectiveTimeFrame: TimeFrame
 
     /// The type of specimen this measurement was made on (e.g. capillary blood)
     public var specimenSource: SpecimenSource?
@@ -33,7 +33,7 @@ public struct BloodGlucose: Schema {
     
     public init (
         bloodGlucose: UnitValue<Double>,
-        effectiveTimeFrame: TimeInterval,
+        effectiveTimeFrame: TimeFrame,
         specimenSource: SpecimenSource? = nil,
         temporalRelationshipToMeal: TemporalRelationshipToMeal? = nil,
         temporalRelationshipToSleep: TemporalRelationshipToSleep? = nil,

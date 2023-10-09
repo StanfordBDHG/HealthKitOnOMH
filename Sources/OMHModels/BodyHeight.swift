@@ -14,8 +14,8 @@ public struct BodyHeight: Schema {
     /// The body weight measurement as a `UnitValue` containing a double value and unit
     public var bodyHeight: UnitValue<Double>
 
-    /// The time interval corresponding to this measurement
-    public var effectiveTimeFrame: TimeInterval
+    /// The time frame corresponding to this measurement
+    public var effectiveTimeFrame: TimeFrame
 
     /// If the value in this data point is a descriptive statistic rather than a single measurement (e.g. minimum, average, median)
     /// this property should contain the specific type of descriptive statistic
@@ -24,7 +24,7 @@ public struct BodyHeight: Schema {
 
     public init(
         bodyHeight: UnitValue<Double>,
-        effectiveTimeFrame: TimeInterval,
+        effectiveTimeFrame: TimeFrame,
         descriptiveStatistic: DescriptiveStatistic? = nil
     ) {
         self.bodyHeight = bodyHeight

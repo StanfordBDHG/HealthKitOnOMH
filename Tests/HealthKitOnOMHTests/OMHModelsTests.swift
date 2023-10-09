@@ -24,26 +24,17 @@ final class OMHModelsTests: XCTestCase {
             return try XCTUnwrap(Calendar.current.date(from: dateComponents))
         }
     }
-    
-    func testTimeInterval() throws {
-        let timeFrame1 = TimeInterval(
-            startDateTime: try startDate,
-            endDateTime: try endDate
-        )
-        let timeFrame2 = TimeInterval(
-            startDateTime: try startDate,
-            endDateTime: try endDate
-        )
 
-        XCTAssertEqual(timeFrame1, timeFrame2)
+    var timeFrame: TimeFrame {
+        get throws {
+            TimeFrame(timeInterval: TimeInterval(startDateTime: try startDate, endDateTime: try endDate))
+        }
     }
-    
+
     func testBloodGlucose() throws {
-        let timeFrame = TimeInterval(startDateTime: try startDate, endDateTime: try endDate)
-        
         let beforeBreakfastGlucose = BloodGlucose(
             bloodGlucose: UnitValue(unit: "mg/dL", value: 80),
-            effectiveTimeFrame: timeFrame,
+            effectiveTimeFrame: try timeFrame,
             specimenSource: SpecimenSource.capillaryBlood,
             temporalRelationshipToMeal: TemporalRelationshipToMeal.beforeBreakfast
         )
@@ -51,11 +42,11 @@ final class OMHModelsTests: XCTestCase {
         XCTAssertEqual(beforeBreakfastGlucose.bloodGlucose.value, 80)
         XCTAssertEqual(beforeBreakfastGlucose.temporalRelationshipToMeal, TemporalRelationshipToMeal.beforeBreakfast)
         XCTAssertEqual(beforeBreakfastGlucose.specimenSource, SpecimenSource.capillaryBlood)
-        XCTAssertEqual(beforeBreakfastGlucose.effectiveTimeFrame, timeFrame)
-        
+        XCTAssertEqual(beforeBreakfastGlucose.effectiveTimeFrame, try timeFrame)
+
         let duringSleepBloodGlucose = BloodGlucose(
             bloodGlucose: UnitValue(unit: "mg/dL", value: 70),
-            effectiveTimeFrame: timeFrame,
+            effectiveTimeFrame: try timeFrame,
             specimenSource: SpecimenSource.capillaryBlood,
             temporalRelationshipToSleep: TemporalRelationshipToSleep.duringSleep
         )
@@ -63,25 +54,23 @@ final class OMHModelsTests: XCTestCase {
         XCTAssertEqual(duringSleepBloodGlucose.bloodGlucose.value, 70)
         XCTAssertEqual(duringSleepBloodGlucose.temporalRelationshipToSleep, TemporalRelationshipToSleep.duringSleep)
         XCTAssertEqual(duringSleepBloodGlucose.specimenSource, SpecimenSource.capillaryBlood)
-        XCTAssertEqual(duringSleepBloodGlucose.effectiveTimeFrame, timeFrame)
-        
+        XCTAssertEqual(duringSleepBloodGlucose.effectiveTimeFrame, try timeFrame)
+
         let averageBloodGlucose = BloodGlucose(
             bloodGlucose: UnitValue(unit: "mg/dL", value: 120),
-            effectiveTimeFrame: timeFrame,
+            effectiveTimeFrame: try timeFrame,
             descriptiveStatistic: DescriptiveStatistic.average
         )
         
         XCTAssertEqual(averageBloodGlucose.bloodGlucose.value, 120)
         XCTAssertEqual(averageBloodGlucose.descriptiveStatistic, DescriptiveStatistic.average)
-        XCTAssertEqual(averageBloodGlucose.effectiveTimeFrame, timeFrame)
+        XCTAssertEqual(averageBloodGlucose.effectiveTimeFrame, try timeFrame)
     }
     
     func testHeartRate() throws {
-        let timeFrame = TimeInterval(startDateTime: try startDate, endDateTime: try endDate)
-        
         let heartRateOnWaking = HeartRate(
             heartRate: UnitValue(unit: "beats/min", value: 50),
-            effectiveTimeFrame: timeFrame,
+            effectiveTimeFrame: try timeFrame,
             temporalRelationshipToSleep: .onWaking
         )
         
@@ -90,66 +79,62 @@ final class OMHModelsTests: XCTestCase {
         
         let heartRateWithActivity = HeartRate(
             heartRate: UnitValue(unit: "beats/min", value: 120),
-            effectiveTimeFrame: timeFrame,
+            effectiveTimeFrame: try timeFrame,
             temporalRelationshipToPhysicalActivity: .duringExercise
         )
         
         XCTAssertEqual(120, heartRateWithActivity.heartRate.value)
         XCTAssertEqual(heartRateWithActivity.temporalRelationshipToPhysicalActivity, .duringExercise)
-        XCTAssertEqual(heartRateWithActivity.effectiveTimeFrame, timeFrame)
-        
+        XCTAssertEqual(heartRateWithActivity.effectiveTimeFrame, try timeFrame)
+
         let heartRateWithDescriptiveStatistics = HeartRate(
             heartRate: UnitValue(unit: "beats/min", value: 50),
-            effectiveTimeFrame: timeFrame,
+            effectiveTimeFrame: try timeFrame,
             descriptiveStatistic: .minimum
         )
         
         XCTAssertEqual(50, heartRateWithDescriptiveStatistics.heartRate.value)
         XCTAssertEqual(heartRateWithDescriptiveStatistics.descriptiveStatistic, .minimum)
-        XCTAssertEqual(heartRateWithDescriptiveStatistics.effectiveTimeFrame, timeFrame)
+        XCTAssertEqual(heartRateWithDescriptiveStatistics.effectiveTimeFrame, try timeFrame)
     }
     
     func testStepCount() throws {
-        let timeFrame = TimeInterval(startDateTime: try startDate, endDateTime: try endDate)
-        
-        let simpleStepCount = StepCount(
+     let simpleStepCount = StepCount(
             stepCount: UnitValue(unit: "count", value: 5000),
-            effectiveTimeFrame: timeFrame
+            effectiveTimeFrame: try timeFrame
         )
         
         XCTAssertEqual(5000, simpleStepCount.stepCount.value)
-        XCTAssertEqual(simpleStepCount.effectiveTimeFrame, timeFrame)
+        XCTAssertEqual(simpleStepCount.effectiveTimeFrame, try timeFrame)
         XCTAssertNil(simpleStepCount.descriptiveStatistic)
         XCTAssertNil(simpleStepCount.descriptiveStatisticDenominator)
         
         let averageStepCount = StepCount(
             stepCount: UnitValue(unit: "count", value: 6500),
-            effectiveTimeFrame: timeFrame,
+            effectiveTimeFrame: try timeFrame,
             descriptiveStatistic: .average,
             descriptiveStatisticDenominator: .d
         )
         
         XCTAssertEqual(6500, averageStepCount.stepCount.value)
-        XCTAssertEqual(averageStepCount.effectiveTimeFrame, timeFrame)
+        XCTAssertEqual(averageStepCount.effectiveTimeFrame, try timeFrame)
         XCTAssertEqual(averageStepCount.descriptiveStatistic, .average)
         XCTAssertEqual(averageStepCount.descriptiveStatisticDenominator, .d)
     }
 
     func testBodyWeight() throws {
-        let timeFrame = TimeInterval(startDateTime: try startDate, endDateTime: try endDate)
-
         let simpleBodyWeight = BodyWeight(
             bodyWeight: UnitValue(unit: "kg", value: 100),
-            effectiveTimeFrame: timeFrame
+            effectiveTimeFrame: try timeFrame
         )
 
         XCTAssertEqual(simpleBodyWeight.bodyWeight.value, 100)
         XCTAssertEqual(simpleBodyWeight.bodyWeight.unit, "kg")
-        XCTAssertEqual(simpleBodyWeight.effectiveTimeFrame, timeFrame)
+        XCTAssertEqual(simpleBodyWeight.effectiveTimeFrame, try timeFrame)
 
         let averageBodyWeight = BodyWeight(
             bodyWeight: UnitValue(unit: "kg", value: 100),
-            effectiveTimeFrame: timeFrame,
+            effectiveTimeFrame: try timeFrame,
             descriptiveStatistic: .average
         )
 
@@ -157,20 +142,18 @@ final class OMHModelsTests: XCTestCase {
     }
 
     func testBodyHeight() throws {
-        let timeFrame = TimeInterval(startDateTime: try startDate, endDateTime: try endDate)
-
         let simpleBodyHeight = BodyHeight(
             bodyHeight: UnitValue(unit: "cm", value: 180),
-            effectiveTimeFrame: timeFrame
+            effectiveTimeFrame: try timeFrame
         )
 
         XCTAssertEqual(simpleBodyHeight.bodyHeight.value, 180)
         XCTAssertEqual(simpleBodyHeight.bodyHeight.unit, "cm")
-        XCTAssertEqual(simpleBodyHeight.effectiveTimeFrame, timeFrame)
+        XCTAssertEqual(simpleBodyHeight.effectiveTimeFrame, try timeFrame)
 
         let averageBodyHeight = BodyHeight(
             bodyHeight: UnitValue(unit: "cm", value: 200),
-            effectiveTimeFrame: timeFrame,
+            effectiveTimeFrame: try timeFrame,
             descriptiveStatistic: .maximum
         )
 
@@ -178,15 +161,13 @@ final class OMHModelsTests: XCTestCase {
     }
     
     func testBodyTemperature() throws {
-        let timeFrame = TimeInterval(startDateTime: try startDate, endDateTime: try endDate)
-        
         let simpleBodyTemperature = BodyTemperature(
             bodyTemperature: UnitValue<Double>(unit: "C", value: 37),
-            effectiveTimeFrame: timeFrame
+            effectiveTimeFrame: try timeFrame
         )
         
         XCTAssertEqual(simpleBodyTemperature.bodyTemperature.value, 37)
         XCTAssertEqual(simpleBodyTemperature.bodyTemperature.unit, "C")
-        XCTAssertEqual(simpleBodyTemperature.effectiveTimeFrame, timeFrame)
+        XCTAssertEqual(simpleBodyTemperature.effectiveTimeFrame, try timeFrame)
     }
 }

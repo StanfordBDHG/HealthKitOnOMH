@@ -13,9 +13,9 @@ public struct StepCount: Schema {
     /// The step count measurement as a `UnitValue` containing a double value and a unit
     public var stepCount: UnitValue<Double>
     
-    /// The time interval corresponding to this measurement
-    public var effectiveTimeFrame: TimeInterval
-    
+    /// The time frame corresponding to this measurement
+    public var effectiveTimeFrame: TimeFrame
+
     /// If the value in this data point is a descriptive statistic rather than a single measurement (e.g. minimum, average, median)
     /// this property should contain the specific type of descriptive statistic
     public var descriptiveStatistic: DescriptiveStatistic?
@@ -26,7 +26,7 @@ public struct StepCount: Schema {
     
     public init (
         stepCount: UnitValue<Double>,
-        effectiveTimeFrame: TimeInterval,
+        effectiveTimeFrame: TimeFrame,
         descriptiveStatistic: DescriptiveStatistic? = nil,
         descriptiveStatisticDenominator: DescriptiveStatisticDenominator? = nil
     ) {
