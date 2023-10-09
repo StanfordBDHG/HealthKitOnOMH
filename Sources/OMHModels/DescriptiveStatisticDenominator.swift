@@ -7,9 +7,9 @@
 
 
 /// An enumeration representing the denominator of the descriptive statistic when the measure has an implicit duration.
-// swiftlint:disable identifier_name
-// We disable this rule because we must use case names as defined by Open mHealth.
 public enum DescriptiveStatisticDenominator: String, Codable {
+    // swiftlint:disable identifier_name
+    // We disable this rule because we must use case names as defined by Open mHealth.
     case d
     case wk
     case Mo
