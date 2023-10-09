@@ -14,10 +14,10 @@ public struct BloodPressure: Schema, Codable, Equatable {
     public static let schemaId = SchemaId(namespace: .omh, name: "blood-pressure", version: "3.1")
 
     /// The systolic blood pressure measurement in mmHg
-    public var systolicBloodPressure: SystolicBloodPressure
+    public var systolicBloodPressure: BloodPressureUnitValue
 
     /// The diastolic blood pressure measurement in mmHg
-    public var diastolicBloodPressure: DiastolicBloodPressure
+    public var diastolicBloodPressure: BloodPressureUnitValue
 
     /// The posture in which the measurement was taken
     public var bodyPosture: BodyPosture?

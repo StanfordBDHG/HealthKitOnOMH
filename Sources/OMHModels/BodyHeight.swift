@@ -13,7 +13,7 @@ public struct BodyHeight: Schema {
     public static let schemaId = SchemaId(namespace: .omh, name: "body-height", version: "1.0")
 
     /// The body weight measurement as a `UnitValue` containing a double value and unit
-    public var bodyHeight: UnitValue<Double>
+    public var bodyHeight: LengthUnitValue
 
     /// The time frame corresponding to this measurement
     public var effectiveTimeFrame: TimeFrame
@@ -24,7 +24,7 @@ public struct BodyHeight: Schema {
 
 
     public init(
-        bodyHeight: UnitValue<Double>,
+        bodyHeight: LengthUnitValue,
         effectiveTimeFrame: TimeFrame,
         descriptiveStatistic: DescriptiveStatistic? = nil
     ) {

@@ -8,7 +8,8 @@
 import Foundation
 
 
-public protocol UnitProtocol: Codable {}
+public protocol UnitProtocol: Codable {
+}
 
 public struct TypedUnitValue<T: UnitProtocol>: Codable {
     private enum CodingKeys: String, CodingKey {
@@ -38,5 +39,11 @@ public struct TypedUnitValue<T: UnitProtocol>: Codable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(unit, forKey: .unit)
         try container.encode(value, forKey: .value)
+    }
+}
+
+extension TypedUnitValue: Equatable where T: Equatable {
+    public static func == (lhs: TypedUnitValue<T>, rhs: TypedUnitValue<T>) -> Bool {
+        lhs.unit == rhs.unit && lhs.value == rhs.value
     }
 }

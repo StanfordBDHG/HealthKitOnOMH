@@ -50,15 +50,15 @@ extension HKQuantitySample {
                 )
             case HKQuantityType(.bodyMass):
                 schema = BodyWeight(
-                    bodyWeight: UnitValue<Double>(
-                        unit: "kg",
+                    bodyWeight: MassUnitValue(
+                        unit: .kg,
                         value: self.quantity.doubleValue(for: HKUnit(from: "kg"))
                     ), effectiveTimeFrame: timeFrame
                 )
             case HKQuantityType(.height):
                 schema = BodyHeight(
-                    bodyHeight: UnitValue<Double>(
-                        unit: "cm",
+                    bodyHeight: LengthUnitValue(
+                        unit: .cm,
                         value: self.quantity.doubleValue(for: HKUnit(from: "cm"))
                     ),
                     effectiveTimeFrame: timeFrame

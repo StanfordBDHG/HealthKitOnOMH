@@ -124,16 +124,16 @@ final class OMHModelsTests: XCTestCase {
 
     func testBodyWeight() throws {
         let simpleBodyWeight = BodyWeight(
-            bodyWeight: UnitValue(unit: "kg", value: 100),
+            bodyWeight: MassUnitValue(unit: .kg, value: 100),
             effectiveTimeFrame: try timeFrame
         )
 
         XCTAssertEqual(simpleBodyWeight.bodyWeight.value, 100)
-        XCTAssertEqual(simpleBodyWeight.bodyWeight.unit, "kg")
+        XCTAssertEqual(simpleBodyWeight.bodyWeight.unit, .kg)
         XCTAssertEqual(simpleBodyWeight.effectiveTimeFrame, try timeFrame)
 
         let averageBodyWeight = BodyWeight(
-            bodyWeight: UnitValue(unit: "kg", value: 100),
+            bodyWeight: MassUnitValue(unit: .kg, value: 100),
             effectiveTimeFrame: try timeFrame,
             descriptiveStatistic: .average
         )
@@ -143,16 +143,16 @@ final class OMHModelsTests: XCTestCase {
 
     func testBodyHeight() throws {
         let simpleBodyHeight = BodyHeight(
-            bodyHeight: UnitValue(unit: "cm", value: 180),
+            bodyHeight: LengthUnitValue(unit: .cm, value: 180),
             effectiveTimeFrame: try timeFrame
         )
 
         XCTAssertEqual(simpleBodyHeight.bodyHeight.value, 180)
-        XCTAssertEqual(simpleBodyHeight.bodyHeight.unit, "cm")
+        XCTAssertEqual(simpleBodyHeight.bodyHeight.unit, .cm)
         XCTAssertEqual(simpleBodyHeight.effectiveTimeFrame, try timeFrame)
 
         let averageBodyHeight = BodyHeight(
-            bodyHeight: UnitValue(unit: "cm", value: 200),
+            bodyHeight: LengthUnitValue(unit: .cm, value: 200),
             effectiveTimeFrame: try timeFrame,
             descriptiveStatistic: .maximum
         )
