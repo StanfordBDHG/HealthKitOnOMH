@@ -9,10 +9,16 @@
 import Foundation
 
 
-public struct SystolicBloodPressure: Codable, Equatable {
-    var value: Double
-    let unit: BloodPressureUnit
-    
+public struct SystolicBloodPressure: Schema, Codable, Equatable {
+    /// The Open mHealth schema identifier
+    public static let schemaId = SchemaId(namespace: .omh, name: "systolic-blood-pressure", version: "1.0")
+
+    /// The blood pressure value
+    public var value: Double
+
+    /// The blood pressure unit
+    public var unit: BloodPressureUnit
+
 
     init(value: Double, unit: BloodPressureUnit = .mmHg) {
         self.value = value
