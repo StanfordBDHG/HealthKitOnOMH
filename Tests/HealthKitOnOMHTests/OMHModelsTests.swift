@@ -100,7 +100,7 @@ final class OMHModelsTests: XCTestCase {
     
     func testStepCount() throws {
      let simpleStepCount = StepCount(
-        stepCount: StepCountUnitValue(unit: .steps, value: 5000),
+            stepCount: StepCountUnitValue(unit: .steps, value: 5000),
             effectiveTimeFrame: try timeFrame
         )
         
@@ -169,5 +169,16 @@ final class OMHModelsTests: XCTestCase {
         XCTAssertEqual(simpleBodyTemperature.bodyTemperature.value, 37)
         XCTAssertEqual(simpleBodyTemperature.bodyTemperature.unit, TemperatureUnit.C)
         XCTAssertEqual(simpleBodyTemperature.effectiveTimeFrame, try timeFrame)
+    }
+    
+    func testRespiratoryRate() throws {
+        let simpleRespiratoryRate = RespiratoryRate(
+            respiratoryRate: RespiratoryRateUnitValue(unit: .breathsPerMinute, value: 20),
+            effectiveTimeFrame: try timeFrame
+        )
+        
+        XCTAssertEqual(simpleRespiratoryRate.respiratoryRate.value, 20)
+        XCTAssertEqual(simpleRespiratoryRate.respiratoryRate.unit, RespiratoryRateUnit.breathsPerMinute)
+        XCTAssertEqual(simpleRespiratoryRate.effectiveTimeFrame, try timeFrame)
     }
 }

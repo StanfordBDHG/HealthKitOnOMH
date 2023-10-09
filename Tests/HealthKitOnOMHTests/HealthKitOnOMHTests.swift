@@ -110,4 +110,18 @@ final class HealthKitOnOMHTests: XCTestCase {
         XCTAssertEqual(37, omhDataPoint.body.bodyTemperature.value)
         XCTAssertEqual(TemperatureUnit.C, omhDataPoint.body.bodyTemperature.unit)
     }
+    
+    func testRespiratoryRate() throws {
+        let respiratoryRateSample = HKQuantitySample(
+            type: HKQuantityType(.respiratoryRate),
+            quantity: HKQuantity(unit: HKUnit.count().unitDivided(by: .minute()), doubleValue: 20),
+            start: try startDate,
+            end: try endDate
+        )
+        
+        let omhDataPoint = try XCTUnwrap(respiratoryRateSample.dataPoint as? any DataPoint<RespiratoryRate>)
+        
+        XCTAssertEqual(20, omhDataPoint.body.respiratoryRate.value)
+        XCTAssertEqual(RespiratoryRateUnit.breathsPerMinute, omhDataPoint.body.respiratoryRate.unit)
+    }
 }

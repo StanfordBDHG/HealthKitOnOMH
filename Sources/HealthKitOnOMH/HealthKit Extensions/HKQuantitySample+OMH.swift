@@ -32,11 +32,42 @@ extension HKQuantitySample {
                     ),
                     effectiveTimeFrame: timeFrame
                 )
+            case HKQuantityType(.bodyMass):
+                schema = BodyWeight(
+                    bodyWeight: MassUnitValue(
+                        unit: .kg,
+                        value: self.quantity.doubleValue(for: HKUnit(from: "kg"))
+                    ), effectiveTimeFrame: timeFrame
+                )
+            case HKQuantityType(.bodyTemperature):
+                schema = BodyTemperature(
+                    bodyTemperature: TemperatureUnitValue(
+                        unit: .C,
+                        value: self.quantity.doubleValue(for: HKUnit(from: "degC"))
+                    ),
+                    effectiveTimeFrame: timeFrame
+                )
             case HKQuantityType(.heartRate):
                 schema = HeartRate(
                     heartRate: HeartRateUnitValue(
                         unit: .beatsPerMinute,
                         value: self.quantity.doubleValue(for: HKUnit(from: "count/min"))
+                    ),
+                    effectiveTimeFrame: timeFrame
+                )
+            case HKQuantityType(.height):
+                schema = BodyHeight(
+                    bodyHeight: LengthUnitValue(
+                        unit: .cm,
+                        value: self.quantity.doubleValue(for: HKUnit(from: "cm"))
+                    ),
+                    effectiveTimeFrame: timeFrame
+                )
+            case HKQuantityType(.respiratoryRate):
+                schema = RespiratoryRate(
+                    respiratoryRate: RespiratoryRateUnitValue(
+                        unit: .breathsPerMinute,
+                        value: self.quantity.doubleValue(for: HKUnit.count().unitDivided(by: .minute()))
                     ),
                     effectiveTimeFrame: timeFrame
                 )
@@ -48,29 +79,6 @@ extension HKQuantitySample {
                     ),
                     effectiveTimeFrame: timeFrame
                 )
-            case HKQuantityType(.bodyMass):
-                schema = BodyWeight(
-                    bodyWeight: MassUnitValue(
-                        unit: .kg,
-                        value: self.quantity.doubleValue(for: HKUnit(from: "kg"))
-                    ), effectiveTimeFrame: timeFrame
-                )
-            case HKQuantityType(.height):
-                schema = BodyHeight(
-                    bodyHeight: LengthUnitValue(
-                        unit: .cm,
-                        value: self.quantity.doubleValue(for: HKUnit(from: "cm"))
-                    ),
-                    effectiveTimeFrame: timeFrame
-                )
-            case HKQuantityType(.bodyTemperature):
-                schema = BodyTemperature(
-                    bodyTemperature: TemperatureUnitValue(
-                        unit: .C,
-                        value: self.quantity.doubleValue(for: .degreeCelsius())
-                    ),
-                    effectiveTimeFrame: timeFrame
-                )
             default:
                 return try buildHKQuantityDataPoint()
             }
@@ -79,16 +87,11 @@ extension HKQuantitySample {
         }
     }
     
-    
     private func buildHKQuantityDataPoint() throws -> any DataPoint {
         var unit = ""
         switch self.quantityType {
-        case HKQuantityType(.bodyTemperature):
-            unit = "degC"
         case HKQuantityType(.oxygenSaturation):
             unit = "%"
-        case HKQuantityType(.respiratoryRate):
-            unit = "count/min"
         default:
             throw HealthKitOnOMHError.notSupported
         }
@@ -102,9 +105,9 @@ extension HKQuantitySample {
             )
         )
 
-        let sample = HealthKitQuantitySample<Double>(
+        let sample = HealthKitQuantitySample(
             quantityType: self.quantityType.identifier,
-            unitValue: UnitValue<Double>(unit: unit, value: value),
+            unitValue: HealthKitUnitValue(unit: HealthKitUnit(unit: unit), value: value),
             effectiveTimeFrame: timeFrame
         )
 
