@@ -34,7 +34,7 @@ final class HealthKitOnOMHTests: XCTestCase {
             end: try endDate
         )
         
-        let omhDataPoint = try XCTUnwrap(heartRateSample.dataPoint as? any DataPoint<HeartRate>)
+        let omhDataPoint = try XCTUnwrap(heartRateSample.omhDataPoint as? any DataPoint<HeartRate>)
         
         XCTAssertEqual(120, omhDataPoint.body.heartRate.value)
         XCTAssertEqual(HeartRateUnit.beatsPerMinute, omhDataPoint.body.heartRate.unit)
@@ -49,7 +49,7 @@ final class HealthKitOnOMHTests: XCTestCase {
             metadata: [HKMetadataKeyBloodGlucoseMealTime: 1]
         )
         
-        let omhDataPoint = try XCTUnwrap(bloodGlucoseSample.dataPoint as? any DataPoint<BloodGlucose>)
+        let omhDataPoint = try XCTUnwrap(bloodGlucoseSample.omhDataPoint as? any DataPoint<BloodGlucose>)
         
         XCTAssertEqual(90, omhDataPoint.body.bloodGlucose.value)
         XCTAssertEqual(BloodGlucoseUnit.milligramsPerDeciliter, omhDataPoint.body.bloodGlucose.unit)
@@ -63,7 +63,7 @@ final class HealthKitOnOMHTests: XCTestCase {
             end: try endDate
         )
         
-        let omhDataPoint = try XCTUnwrap(stepCountSample.dataPoint as? any DataPoint<StepCount>)
+        let omhDataPoint = try XCTUnwrap(stepCountSample.omhDataPoint as? any DataPoint<StepCount>)
         
         XCTAssertEqual(100, omhDataPoint.body.stepCount.value)
         XCTAssertEqual(.steps, omhDataPoint.body.stepCount.unit)
@@ -77,7 +77,7 @@ final class HealthKitOnOMHTests: XCTestCase {
             end: try endDate
         )
 
-        let omhDataPoint = try XCTUnwrap(bodyHeightSample.dataPoint as? any DataPoint<BodyHeight>)
+        let omhDataPoint = try XCTUnwrap(bodyHeightSample.omhDataPoint as? any DataPoint<BodyHeight>)
 
         XCTAssertEqual(180, omhDataPoint.body.bodyHeight.value)
         XCTAssertEqual(LengthUnit.cm, omhDataPoint.body.bodyHeight.unit)
@@ -91,7 +91,7 @@ final class HealthKitOnOMHTests: XCTestCase {
             end: try endDate
         )
 
-        let omhDataPoint = try XCTUnwrap(bodyWeightSample.dataPoint as? any DataPoint<BodyWeight>)
+        let omhDataPoint = try XCTUnwrap(bodyWeightSample.omhDataPoint as? any DataPoint<BodyWeight>)
 
         XCTAssertEqual(100, omhDataPoint.body.bodyWeight.value)
         XCTAssertEqual(MassUnit.kg, omhDataPoint.body.bodyWeight.unit)
@@ -105,7 +105,7 @@ final class HealthKitOnOMHTests: XCTestCase {
             end: try endDate
         )
         
-        let omhDataPoint = try XCTUnwrap(bodyTemperatureSample.dataPoint as? any DataPoint<BodyTemperature>)
+        let omhDataPoint = try XCTUnwrap(bodyTemperatureSample.omhDataPoint as? any DataPoint<BodyTemperature>)
         
         XCTAssertEqual(37, omhDataPoint.body.bodyTemperature.value)
         XCTAssertEqual(TemperatureUnit.C, omhDataPoint.body.bodyTemperature.unit)
@@ -119,7 +119,7 @@ final class HealthKitOnOMHTests: XCTestCase {
             end: try endDate
         )
         
-        let omhDataPoint = try XCTUnwrap(respiratoryRateSample.dataPoint as? any DataPoint<RespiratoryRate>)
+        let omhDataPoint = try XCTUnwrap(respiratoryRateSample.omhDataPoint as? any DataPoint<RespiratoryRate>)
         
         XCTAssertEqual(20, omhDataPoint.body.respiratoryRate.value)
         XCTAssertEqual(RespiratoryRateUnit.breathsPerMinute, omhDataPoint.body.respiratoryRate.unit)
@@ -133,7 +133,7 @@ final class HealthKitOnOMHTests: XCTestCase {
             end: try endDate
         )
         
-        let omhDataPoint = try XCTUnwrap(oxygenSaturationSample.dataPoint as? any DataPoint<OxygenSaturation>)
+        let omhDataPoint = try XCTUnwrap(oxygenSaturationSample.omhDataPoint as? any DataPoint<OxygenSaturation>)
         
         XCTAssertEqual(99, omhDataPoint.body.oxygenSaturation.value)
         XCTAssertEqual(OxygenSaturationUnit.percent, omhDataPoint.body.oxygenSaturation.unit)
@@ -148,7 +148,7 @@ final class HealthKitOnOMHTests: XCTestCase {
             end: date
         )
         
-        let omhDataPoint = try XCTUnwrap(sample.dataPoint as? any DataPoint<HeartRate>)
+        let omhDataPoint = try XCTUnwrap(sample.omhDataPoint as? any DataPoint<HeartRate>)
         
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.prettyPrinted, .withoutEscapingSlashes, .sortedKeys]
@@ -157,6 +157,5 @@ final class HealthKitOnOMHTests: XCTestCase {
         let data = try encoder.encode(omhDataPoint)
         
         let json = String(decoding: data, as: UTF8.self)
-        print(json)
     }
 }

@@ -14,7 +14,7 @@ SPDX-License-Identifier: MIT
 [![codecov](https://codecov.io/gh/StanfordBDHG/HealthKitOnOMH/branch/main/graph/badge.svg?token=17BMMYE3AC)](https://codecov.io/gh/StanfordBDHG/HealthKitOnOMH)
 
 
-The HealthKitonOMH library provides extensions that convert supported HealthKit samples into corresponding [IEEE Standard 1752.1](https://opensource.ieee.org/omh/1752) and [Open mHealth](https://www.openmhealth.org/documentation/#/overview/get-started) schemas.
+The HealthKitonOMH library provides extensions that convert supported HealthKit samples into corresponding [IEEE Standard 1752.1](https://opensource.ieee.org/omh/1752) and [Open mHealth (OMH)](https://www.openmhealth.org/documentation/#/overview/get-started) schemas.
 
 
 ## Installation
@@ -25,16 +25,16 @@ HealthKitOnOMH can be installed into your Xcode project using [Swift Package Man
 
 ## Usage
 
-The HealthKitonOMH library provides extensions that convert supported HealthKit samples into corresponding [IEEE Standard 1752.1](https://opensource.ieee.org/omh/1752) and [Open mHealth](https://www.openmhealth.org/documentation/#/overview/get-started) schemas.
+The HealthKitonOMH library provides extensions that convert supported HealthKit samples into corresponding [IEEE Standard 1752.1](https://opensource.ieee.org/omh/1752) and [Open mHealth (OMH)](https://www.openmhealth.org/documentation/#/overview/get-started) schemas.
 
 ```swift
 let sample: HKQuantitySample = // ...
-let dataPoint: DataPoint<HealthKitQuantitySample> = try sample.dataPoint
+let dataPoint: DataPoint<HealthKitQuantitySample> = try sample.omhDataPoint
 ```
 
 ## Example
 
-In the following example, we will query the HealthKit store for step count data, convert the resulting samples to Open mHealth data points based on the [omh:step-count](https://www.openmhealth.org/documentation/#/schema-docs/schema-library/schemas/omh_step-count) schema.
+In the following example, we will query the HealthKit store for step count data, convert the resulting samples to Open mHealth data points based on the [omh:heart-rate](https://www.openmhealth.org/documentation/#/schema-docs/schema-library/schemas/omh_heart-rate) schema.
 
 ```swift
 import HealthKitOnOMH
@@ -42,6 +42,7 @@ import HealthKitOnOMH
 // Initialize an HKHealthStore instance and request permissions with it
 // ...
 
+// Or create a HealthKit sample
 let date = ISO8601DateFormatter().date(from: "1885-11-11T00:00:00-08:00") ?? .now
 let sample = HKQuantitySample(
     type: HKQuantityType(.heartRate),
@@ -50,34 +51,30 @@ let sample = HKQuantitySample(
     end: date
 )
 
-// Convert the results to Open mHealth data points
-let omhDataPoint: any DataPoint<HeartRate>
+// Convert the sample into an Open mHealth (OMH) Data Point
+let json: String
 do {
-    try omhDataPoint = sample.dataPoint
+    guard let omhDataPoint = try sample.omhDataPoint as? any DataPoint<HeartRate> else {
+        return
+    }
+            
+    // Encode the data point as JSON
+    let encoder = JSONEncoder()
+    encoder.outputFormatting = [.prettyPrinted, .withoutEscapingSlashes, .sortedKeys]
+    
+    // Note that Open mHealth uses snake case for its properties when represented in JSON
+    encoder.keyEncodingStrategy = .convertToSnakeCase
+            
+    let data = try encoder.encode(omhDataPoint)
+            
+    json = String(decoding: data, as: UTF8.self)
 } catch {
-    // Handle any mapping errors here.
+    // Handle any errors here.
     // ...
 }
-
-// Encode Open mHealth data points as JSON
-let encoder = JSONEncoder()
-encoder.outputFormatting = [.prettyPrinted, .withoutEscapingSlashes, .sortedKeys]
-
-// Open mHealth uses snake case for properties in JSON
-encoder.keyEncodingStrategy = .convertToSnakeCase
-
-guard let omhDataPoint, 
-      let data = try? encoder.encode(omhDataPoint) else {
-    // Handle any encoding errors here.
-    // ...
-}
-
-// Print the resulting JSON
-let json = String(decoding: data, as: UTF8.self)
-print(json)
 ```
 
-The above code will produce the following JSON in conformance with the Open mHealth Heart Rate schema:
+The above code will produce the following JSON in conformance with Open mHealth's [heart-rate](https://www.openmhealth.org/documentation/#/schema-docs/schema-library/schemas/omh_heart-rate) schema:
 
 ```
 {

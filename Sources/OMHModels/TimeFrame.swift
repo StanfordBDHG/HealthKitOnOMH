@@ -12,14 +12,13 @@ import Foundation
 /// Enables a particular time frame to be described as either a point in time or a time interval.
 /// Generated from Open mHealth `omh:time-frame:1.0` (https://www.openmhealth.org/documentation/#/schema-docs/schema-library/schemas/omh_time-frame)
 public struct TimeFrame: Schema, Equatable {
-    /// The Open mHealth schema identifier
-    public static let schemaId = SchemaId(namespace: .omh, name: "time-frame", version: "1.0")
-    
     enum CodingKeys: String, CodingKey {
         case dateTime = "date_time"
         case timeInterval = "time_interval"
     }
 
+    /// The Open mHealth schema identifier
+    public static let schemaId = SchemaId(namespace: .omh, name: "time-frame", version: "1.0")
     public let dateTime: DateTime?
     public let timeInterval: TimeInterval?
 

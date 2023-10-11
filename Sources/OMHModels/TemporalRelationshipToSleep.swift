@@ -10,10 +10,10 @@
 /// Represents the temporal relationship of a clinical measure or assessment to sleep
 /// Generated from Open mHealth `omh:temporal-relationship-to-sleep:1.0` (https://www.openmhealth.org/documentation/#/schema-docs/schema-library/schemas/omh_temporal-relationship-to-sleep)
 public enum TemporalRelationshipToSleep: String, Schema {
-    /// The Open mHealth schema identifier
-    public static let schemaId = SchemaId(namespace: .omh, name: "temporal-relationship-to-sleep", version: "1.0")
-    
     case beforeSleeping = "before sleeping"
     case duringSleep = "during sleep"
     case onWaking = "on waking"
+    
+    /// The Open mHealth schema identifier
+    public static let schemaId = SchemaId(namespace: .omh, name: "temporal-relationship-to-sleep", version: "1.0")
 }

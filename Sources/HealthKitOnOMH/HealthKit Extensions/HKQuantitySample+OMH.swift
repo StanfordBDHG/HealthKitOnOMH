@@ -12,7 +12,7 @@ import HealthKit
 
 extension HKQuantitySample {
     /// The OMH data point created from converting this HKQuantitySample
-    public var dataPoint: any DataPoint {
+    public var omhDataPoint: any DataPoint {
         get throws {
             let schema: any Schema
 
@@ -67,7 +67,7 @@ extension HKQuantitySample {
                 schema = OxygenSaturation(
                     oxygenSaturation: OxygenSaturationUnitValue(
                         unit: .percent,
-                        value: self.quantity.doubleValue(for: HKUnit.percent())
+                        value: self.quantity.doubleValue(for: HKUnit(from: "%"))
                     ),
                     effectiveTimeFrame: timeFrame
                 )

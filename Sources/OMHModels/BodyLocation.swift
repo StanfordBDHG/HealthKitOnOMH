@@ -11,9 +11,6 @@ import Foundation
 /// A location on the body. Values from the Anatomical or acquired body structure hierarchy of SNOMED can be added as needed.
 /// Generated from Open mHealth `omh:body-location:1.0` (https://www.openmhealth.org/documentation/#/schema-docs/schema-library/schemas/omh_body-location)
 public enum BodyLocation: String, Schema {
-    /// The Open mHealth schema identifier
-    public static let schemaId = SchemaId(namespace: .omh, name: "body-location", version: "1.0")
-    
     case leftAnkle = "left ankle"
     case rightAnkle = "right ankle"
     case leftHip = "left hip"
@@ -26,4 +23,7 @@ public enum BodyLocation: String, Schema {
     case rightUpperArm = "right upper arm"
     case leftWrist = "left wrist"
     case rightWrist = "right wrist"
+    
+    /// The Open mHealth schema identifier
+    public static let schemaId = SchemaId(namespace: .omh, name: "body-location", version: "1.0")
 }

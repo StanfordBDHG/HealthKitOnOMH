@@ -8,5 +8,6 @@
 
 /// A protocol for an Open mHealth schema
 public protocol Schema: Codable, Sendable {
+    /// A schema identifier for an Open mHealth schema
     static var schemaId: SchemaId { get }
 }

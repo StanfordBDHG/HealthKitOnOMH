@@ -10,10 +10,7 @@
 /// Represents the temporal relationship of a clinical measure or assessment to meals (e.g., fasting, after lunch).
 /// Generated from Open mHealth `omh:temporal-relationship-to-meal:1.2` (https://www.openmhealth.org/documentation/#/schema-docs/schema-library/schemas/omh_temporal-relationship-to-meal)
 public enum TemporalRelationshipToMeal: String, Schema {
-    /// The Open mHealth schema identifier
-    public static let schemaId = SchemaId(namespace: .omh, name: "temporal-relationship-to-meal", version: "1.2")
-    
-    case fasting = "fasting"
+    case fasting
     case notFasting = "not fasting"
     case beforeMeal = "before meal"
     case afterMeal = "after meal"
@@ -26,4 +23,7 @@ public enum TemporalRelationshipToMeal: String, Schema {
     case twoHoursPostprandial = "2 hours postprandial"
     case withMeal = "with meal"
     case withFood = "with food"
+    
+    /// The Open mHealth schema identifier
+    public static let schemaId = SchemaId(namespace: .omh, name: "temporal-relationship-to-meal", version: "1.2")
 }

@@ -10,11 +10,11 @@
 /// The value set is not complete. More values are added as use cases require.
 /// Generated from Open mHealth `omh:specimen-source:2.1` (https://www.openmhealth.org/documentation/#/schema-docs/schema-library/schemas/omh_specimen-source)
 public enum SpecimenSource: String, Codable, Sendable {
-    case breath = "breath"
+    case breath
     case capillaryBlood = "capillary blood"
     case interstitialFluid = "interstitial fluid"
-    case saliva = "saliva"
-    case sweat = "sweat"
-    case tears = "tears"
-    case urine = "urine"
+    case saliva
+    case sweat
+    case tears
+    case urine
 }
