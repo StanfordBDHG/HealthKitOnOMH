@@ -50,7 +50,7 @@ let sample = HKQuantitySample(
     end: date
 )
 
-// Convert the results to Open mHealth schema
+// Convert the results to Open mHealth data points
 let omhDataPoint: DataPoint<StepCount>
 do {
     try omhDataPoint = sample.dataPoint
@@ -59,9 +59,12 @@ do {
     // ...
 }
 
-// Encode FHIR observations as JSON
+// Encode Open mHealth data points as JSON
 let encoder = JSONEncoder()
 encoder.outputFormatting = [.prettyPrinted, .withoutEscapingSlashes, .sortedKeys]
+
+// Open mHealth uses snake case for properties in JSON
+encoder.keyEncodingStrategy = .convertToSnakeCase
 
 guard let omhDataPoint, 
       let data = try? encoder.encode(omhDataPoint) else {
