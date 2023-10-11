@@ -157,5 +157,6 @@ final class HealthKitOnOMHTests: XCTestCase {
         let data = try encoder.encode(omhDataPoint)
         
         let json = String(decoding: data, as: UTF8.self)
+        print(json)
     }
 }

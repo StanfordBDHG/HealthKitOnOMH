@@ -18,6 +18,10 @@ public enum OxygenSaturationMeasurementSystem: String, Codable, Sendable {
     case peripheralCapillary = "peripheral capillary"
 }
 
+public enum OxygenTherapyModeOfAdministration: String, Codable, Sendable {
+    case nasalCannula = "nasal cannula"
+}
+
 /// An Oxygen Saturation measurement
 /// Generated from Open mHealth `omh:oxygen-saturation:2.0` (https://www.openmhealth.org/documentation/#/schema-docs/schema-library/schemas/omh_oxygen-saturation)
 public struct OxygenSaturation: Schema {
@@ -30,6 +34,12 @@ public struct OxygenSaturation: Schema {
     /// The method by which oxygen saturation is measured
     public var measurementMethod: OxygenSaturationMeasurementMethod?
     
+    /// The mode of administration for supplemental oxygen
+    public var oxygenTherapyModeOfAdministration: OxygenTherapyModeOfAdministration?
+    
+    /// The flow rate of supplemental oxygen
+    public var supplementalOxygenFlowRate: SupplementalOxygenFlowRateUnitValue?
+    
     /// The time frame corresponding to this measurement
     public var effectiveTimeFrame: TimeFrame
     
@@ -41,11 +51,15 @@ public struct OxygenSaturation: Schema {
         oxygenSaturation: OxygenSaturationUnitValue,
         effectiveTimeFrame: TimeFrame,
         measurementMethod: OxygenSaturationMeasurementMethod? = nil,
+        oxygenTherapyModeOfAdministration: OxygenTherapyModeOfAdministration? = nil,
+        supplementalOxygenFlowRate: SupplementalOxygenFlowRateUnitValue? = nil,
         descriptiveStatistic: DescriptiveStatistic? = nil
     ) {
         self.oxygenSaturation = oxygenSaturation
         self.effectiveTimeFrame = effectiveTimeFrame
         self.measurementMethod = measurementMethod
+        self.oxygenTherapyModeOfAdministration = oxygenTherapyModeOfAdministration
+        self.supplementalOxygenFlowRate = supplementalOxygenFlowRate
         self.descriptiveStatistic = descriptiveStatistic
     }
 }
