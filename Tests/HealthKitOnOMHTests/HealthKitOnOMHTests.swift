@@ -138,4 +138,25 @@ final class HealthKitOnOMHTests: XCTestCase {
         XCTAssertEqual(99, omhDataPoint.body.oxygenSaturation.value)
         XCTAssertEqual(OxygenSaturationUnit.percent, omhDataPoint.body.oxygenSaturation.unit)
     }
+    
+    func testEncoding() throws {
+        let date = ISO8601DateFormatter().date(from: "1885-11-11T00:00:00-08:00") ?? .now
+        let sample = HKQuantitySample(
+            type: HKQuantityType(.heartRate),
+            quantity: HKQuantity(unit: HKUnit.count().unitDivided(by: .minute()), doubleValue: 42.0),
+            start: date,
+            end: date
+        )
+        
+        let omhDataPoint = try XCTUnwrap(sample.dataPoint as? any DataPoint<HeartRate>)
+        
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = [.prettyPrinted, .withoutEscapingSlashes, .sortedKeys]
+        encoder.keyEncodingStrategy = .convertToSnakeCase
+        
+        let data = try encoder.encode(omhDataPoint)
+        
+        let json = String(decoding: data, as: UTF8.self)
+        print(json)
+    }
 }

@@ -7,7 +7,10 @@
 
 
 /// An enumeration representing different types of statistical measures that can be represented in data points
-public enum DescriptiveStatistic: String, Codable {
+public enum DescriptiveStatistic: String, Schema {
+    /// The Open mHealth schema identifier
+    public static let schemaId = SchemaId(namespace: .omh, name: "descriptive-statistic", version: "1.0")
+    
     case average = "average"
     case count = "count"
     case maximum = "maximum"

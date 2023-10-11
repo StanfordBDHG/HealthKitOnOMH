@@ -7,7 +7,10 @@
 
 
 /// An enumeration representing the denominator of the descriptive statistic when the measure has an implicit duration.
-public enum DescriptiveStatisticDenominator: String, Codable {
+public enum DescriptiveStatisticDenominator: String, Schema {
+    /// The Open mHealth schema identifier
+    public static let schemaId = SchemaId(namespace: .omh, name: "descriptive-statistic-denominator", version: "1.0")
+    
     // swiftlint:disable identifier_name
     // We disable this rule because we must use case names as defined by Open mHealth.
     case d

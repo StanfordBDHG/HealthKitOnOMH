@@ -27,7 +27,7 @@ final class OMHModelsTests: XCTestCase {
 
     var timeFrame: TimeFrame {
         get throws {
-            TimeFrame(timeInterval: TimeInterval(startDateTime: try startDate, endDateTime: try endDate))
+            TimeFrame(timeInterval: TimeInterval(startDateTime: DateTime(date: try startDate), endDateTime: DateTime(date: try endDate)))
         }
     }
 

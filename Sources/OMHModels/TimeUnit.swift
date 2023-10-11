@@ -10,7 +10,7 @@ import Foundation
 
 
 /// Allowed time units are drawn from the HL7 UCUM Common Synonyms code set (https://download.hl7.de/documents/ucum/ucumdata.html)
-public enum TimeUnit: String, Codable {
+public enum TimeUnit: String, Codable, Sendable {
     // swiftlint:disable identifier_name
     // We disable this rule because we must use case names as defined by Open mHealth.
     case ps

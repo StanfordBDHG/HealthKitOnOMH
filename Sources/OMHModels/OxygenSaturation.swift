@@ -9,12 +9,12 @@ import Foundation
 
 
 /// The method by which the oxygen saturation is measured. Currently, pulse oximetry is teh only method used for measuring oxygen saturation in a non-hospital setting.
-public enum OxygenSaturationMeasurementMethod: String, Codable {
+public enum OxygenSaturationMeasurementMethod: String, Codable, Sendable {
     case pulseOximetry = "pulse oximetry"
 }
 
 /// Oxygen saturation can be measured at different levels in the body and is labeled accordingly: peripheral, arterial, etc.
-public enum OxygenSaturationMeasurementSystem: String, Codable {
+public enum OxygenSaturationMeasurementSystem: String, Codable, Sendable {
     case peripheralCapillary = "peripheral capillary"
 }
 

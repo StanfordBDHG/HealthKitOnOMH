@@ -7,6 +7,6 @@
 
 
 /// A protocol for an Open mHealth schema
-public protocol Schema: Codable {
+public protocol Schema: Codable, Sendable {
     static var schemaId: SchemaId { get }
 }

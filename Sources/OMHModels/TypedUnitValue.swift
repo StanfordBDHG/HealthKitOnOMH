@@ -8,10 +8,10 @@
 import Foundation
 
 
-public protocol UnitProtocol: Codable {
+public protocol UnitProtocol: Codable, Sendable {
 }
 
-public struct TypedUnitValue<T: UnitProtocol>: Codable {
+public struct TypedUnitValue<T: UnitProtocol>: Codable, Sendable {
     private enum CodingKeys: String, CodingKey {
         case unit, value
     }

@@ -10,7 +10,7 @@ import Foundation
 
 
 /// Generated from Open mHealth `omh:part-of-day:1.0` (https://www.openmhealth.org/documentation/#/schema-docs/schema-library/schemas/omh_part-of-day)
-public enum PartOfDay: String, Codable {
+public enum PartOfDay: String, Codable, Sendable {
     case morning
     case afternoon
     case evening

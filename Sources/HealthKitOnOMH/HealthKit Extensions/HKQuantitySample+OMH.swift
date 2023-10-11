@@ -18,8 +18,8 @@ extension HKQuantitySample {
 
             let timeFrame = TimeFrame(
                 timeInterval: TimeInterval(
-                    startDateTime: self.startDate,
-                    endDateTime: self.endDate
+                    startDateTime: DateTime(date: self.startDate),
+                    endDateTime: DateTime(date: self.endDate)
                 )
             )
 
@@ -99,7 +99,7 @@ extension HKQuantitySample {
         SchemaDataPoint<T>(
             header: Header(
                 id: self.uuid.uuidString,
-                creationDateTime: Date(),
+                creationDateTime: DateTime(date: Date()),
                 schemaId: type(of: body).schemaId
             ),
             body: body

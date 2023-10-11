@@ -51,7 +51,7 @@ let sample = HKQuantitySample(
 )
 
 // Convert the results to Open mHealth data points
-let omhDataPoint: DataPoint<StepCount>
+let omhDataPoint: any DataPoint<HeartRate>
 do {
     try omhDataPoint = sample.dataPoint
 } catch {
@@ -75,6 +75,40 @@ guard let omhDataPoint,
 // Print the resulting JSON
 let json = String(decoding: data, as: UTF8.self)
 print(json)
+```
+
+The above code will produce the following JSON in conformance with the Open mHealth Heart Rate schema:
+
+```
+{
+  "body" : {
+    "effective_time_frame" : {
+      "time_interval" : {
+        "end_date_time" : {
+          "value" : "1885-11-11T08:00:00Z"
+        },
+        "start_date_time" : {
+          "value" : "1885-11-11T08:00:00Z"
+        }
+      }
+    },
+    "heart_rate" : {
+      "unit" : "beats/min",
+      "value" : 42
+    }
+  },
+  "header" : {
+    "creation_date_time" : {
+      "value" : "2023-10-11T11:53:30Z"
+    },
+    "id" : "FF7F647D-8757-4926-871A-3D61DDCD0900",
+    "schema_id" : {
+      "name" : "heart-rate",
+      "namespace" : "omh",
+      "version" : "2.0"
+    }
+  }
+}
 ```
 
 ## License
