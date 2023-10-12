@@ -181,4 +181,14 @@ final class OMHModelsTests: XCTestCase {
         XCTAssertEqual(simpleRespiratoryRate.respiratoryRate.unit, RespiratoryRateUnit.breathsPerMinute)
         XCTAssertEqual(simpleRespiratoryRate.effectiveTimeFrame, try timeFrame)
     }
+    
+    func testTotalSleepTime() throws {
+        let totalSleepTime = TotalSleepTime(
+            totalSleepTime: DurationUnitValue(unit: .min, value: 465),
+            effectiveTimeFrame: try timeFrame
+        )
+        
+        XCTAssertEqual(totalSleepTime.totalSleepTime.value, 465)
+        XCTAssertEqual(totalSleepTime.totalSleepTime.unit, .min)
+    }
 }
