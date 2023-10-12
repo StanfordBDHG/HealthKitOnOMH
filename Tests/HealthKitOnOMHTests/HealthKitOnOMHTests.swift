@@ -139,6 +139,20 @@ final class HealthKitOnOMHTests: XCTestCase {
         XCTAssertEqual(OxygenSaturationUnit.percent, omhDataPoint.body.oxygenSaturation.unit)
     }
     
+    func testBodyFatPercentage() throws {
+        let bodyFatPercentageSample = HKQuantitySample(
+            type: HKQuantityType(.bodyFatPercentage),
+            quantity: HKQuantity(unit: HKUnit.percent(), doubleValue: 16),
+            start: try endDate,
+            end: try endDate
+        )
+        
+        let omhDataPoint = try XCTUnwrap(bodyFatPercentageSample.omhDataPoint as? any DataPoint<BodyFatPercentage>)
+        
+        XCTAssertEqual(16, omhDataPoint.body.bodyFatPercentage.value)
+        XCTAssertEqual(BodyFatPercentageUnit.percent, omhDataPoint.body.bodyFatPercentage.unit)
+    }
+    
     func testEncoding() throws {
         let date = ISO8601DateFormatter().date(from: "1885-11-11T00:00:00-08:00") ?? .now
         let sample = HKQuantitySample(

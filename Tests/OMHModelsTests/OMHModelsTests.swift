@@ -191,4 +191,13 @@ final class OMHModelsTests: XCTestCase {
         XCTAssertEqual(totalSleepTime.totalSleepTime.value, 465)
         XCTAssertEqual(totalSleepTime.totalSleepTime.unit, .min)
     }
+    
+    func testBodyFatPercentage() throws {
+        let bodyFatPercentage = BodyFatPercentage(
+            bodyFatPercentage: BodyFatPercentageUnitValue(unit: .percent, value: 16)
+        )
+        
+        XCTAssertEqual(bodyFatPercentage.bodyFatPercentage.value, 16)
+        XCTAssertEqual(bodyFatPercentage.bodyFatPercentage.unit, .percent)
+    }
 }

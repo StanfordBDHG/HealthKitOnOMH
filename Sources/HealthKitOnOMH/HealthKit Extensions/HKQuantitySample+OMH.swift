@@ -32,6 +32,14 @@ extension HKQuantitySample {
                     ),
                     effectiveTimeFrame: timeFrame
                 )
+            case HKQuantityType(.bodyFatPercentage):
+                schema = BodyFatPercentage(
+                    bodyFatPercentage: BodyFatPercentageUnitValue(
+                        unit: .percent,
+                        value: self.quantity.doubleValue(for: HKUnit(from: "%"))
+                    ),
+                    effectiveTimeFrame: timeFrame
+                )
             case HKQuantityType(.bodyMass):
                 schema = BodyWeight(
                     bodyWeight: MassUnitValue(

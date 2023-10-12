@@ -8,9 +8,9 @@
 import Foundation
 
 
-/// A type representing a value paired with a unit specific to oxygen saturation measurements
-public typealias OxygenSaturationUnitValue = TypedUnitValue<OxygenSaturationUnit>
+/// A type representing a value paired with a unit specific to body fat percentage
+public typealias BodyFatPercentageUnitValue = TypedUnitValue<BodyFatPercentageUnit>
 
-public enum OxygenSaturationUnit: String, UnitProtocol {
+public enum BodyFatPercentageUnit: String, UnitProtocol {
     case percent = "%"
 }
