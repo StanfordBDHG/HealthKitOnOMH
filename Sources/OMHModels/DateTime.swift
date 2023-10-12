@@ -24,4 +24,9 @@ public struct DateTime: Schema, Equatable {
     public init(date: Date) {
         self.value = DateTime.formatter.string(from: date)
     }
+    
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        value = try container.decode(String.self)
+    }
 }

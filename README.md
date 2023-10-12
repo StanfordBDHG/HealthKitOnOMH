@@ -126,7 +126,6 @@ The above code will produce the following JSON in conformance with Open mHealth'
 | HKQuantityTypeIdentifierStepCount | :white_check_mark: | [omh:step-count:3.x](http://www.openmhealth.org/documentation/#/schema-docs/schema-library/schemas/omh_step-count) |
 
 
-
 ## License
 This project is licensed under the MIT License. See [Licenses](https://github.com/StanfordBDHG/HealthKitOnOMH/tree/main/LICENSES) for more information.
 

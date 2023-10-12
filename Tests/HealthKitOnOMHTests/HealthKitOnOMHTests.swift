@@ -166,6 +166,19 @@ final class HealthKitOnOMHTests: XCTestCase {
         XCTAssertEqual(22.5, omhDataPoint.body.bodyMassIndex.value)
         XCTAssertEqual(BodyMassIndexUnit.kilogramsPerMeterSquared, omhDataPoint.body.bodyMassIndex.unit)
     }
+    
+    func testUnsupportedQuantityType() throws {
+        let sample = HKQuantitySample(
+            type: HKQuantityType(.nikeFuel),
+            quantity: HKQuantity(unit: .count(), doubleValue: 1),
+            start: try startDate,
+            end: try endDate
+        )
+        
+        XCTAssertThrowsError(try sample.omhDataPoint) { error in
+            XCTAssertEqual(error as? HealthKitOnOMHError, HealthKitOnOMHError.notSupported)
+        }
+    }
 
     func testEncoding() throws {
         let date = ISO8601DateFormatter().date(from: "1885-11-11T00:00:00-08:00") ?? .now
