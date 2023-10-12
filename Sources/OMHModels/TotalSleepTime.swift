@@ -9,7 +9,7 @@ import Foundation
 
 
 /// Total amount of time spent asleep
-/// Generated from Open mHealth `omh:total-sleep-time:1.0` (https://www.openmhealth.org/schemas/omh_total-sleep-time/)
+/// Generated from IEEE 1752.1 `omh:total-sleep-time:1.0` (https://w3id.org/ieee/ieee-1752-schema/total-sleep-time.json)
 public struct TotalSleepTime: Schema {
     /// The Open mHealth schema identifier
     public static let schemaId = SchemaId(namespace: .omh, name: "total-sleep-time", version: "1.0")
@@ -19,6 +19,9 @@ public struct TotalSleepTime: Schema {
     
     /// The time frame corresponding to this measurement
     public var effectiveTimeFrame: TimeFrame
+    
+    // We disable this rule to stay conformant to the schema
+    public var isMainSleep: Bool? // swiftlint:disable:this discouraged_optional_boolean
     
     /// If the value in this data point is a descriptive statistic rather than a single measurement (e.g. minimum, average, median)
     /// this property should contain the specific type of descriptive statistic
@@ -31,11 +34,13 @@ public struct TotalSleepTime: Schema {
     public init(
         totalSleepTime: DurationUnitValue,
         effectiveTimeFrame: TimeFrame,
+        isMainSleep: Bool? = nil, // swiftlint:disable:this discouraged_optional_boolean
         descriptiveStatistic: DescriptiveStatistic? = nil,
         descriptiveStatisticDenominator: DescriptiveStatisticDenominator? = nil
     ) {
         self.totalSleepTime = totalSleepTime
         self.effectiveTimeFrame = effectiveTimeFrame
+        self.isMainSleep = isMainSleep
         self.descriptiveStatistic = descriptiveStatistic
         self.descriptiveStatisticDenominator = descriptiveStatisticDenominator
     }

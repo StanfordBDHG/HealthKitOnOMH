@@ -7,6 +7,7 @@
 
 
 /// An enumeration representing different types of statistical measures that can be represented in data points
+/// Generated from IEEE 1752.1 `descriptive-statistic-1.0` (https://w3id.org/ieee/ieee-1752-schema/descriptive-statistic.json)
 public enum DescriptiveStatistic: String, Schema {
     case average
     case count
@@ -27,5 +28,5 @@ public enum DescriptiveStatistic: String, Schema {
     case fourthQuintile = "4th quintile"
     
     /// The Open mHealth schema identifier
-    public static let schemaId = SchemaId(namespace: .omh, name: "descriptive-statistic", version: "1.0")
+    public static let schemaId = SchemaId(namespace: .ieee, name: "descriptive-statistic", version: "1.0")
 }

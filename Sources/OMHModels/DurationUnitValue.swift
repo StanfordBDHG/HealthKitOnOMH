@@ -9,10 +9,10 @@
 import Foundation
 
 
-/// Generated from Open mHealth `omh:duration-unit-value:1.0` (https://www.openmhealth.org/documentation/#/schema-docs/schema-library/schemas/omh_duration-unit-value)
+/// Generated from IEEE 1752.1 `duration-unit-value:1.0` (https://w3id.org/ieee/ieee-1752-schema/duration-unit-value.json)
 public struct DurationUnitValue: Schema, Equatable {
     /// The Open mHealth schema identifier
-    public static let schemaId = SchemaId(namespace: .omh, name: "duration-unit-value", version: "1.0")
+    public static let schemaId = SchemaId(namespace: .ieee, name: "duration-unit-value", version: "1.0")
     
     public var unit: TimeUnit
     public var value: Double
