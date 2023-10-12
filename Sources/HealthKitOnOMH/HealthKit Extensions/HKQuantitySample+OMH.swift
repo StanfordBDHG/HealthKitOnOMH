@@ -12,70 +12,110 @@ import HealthKit
 
 extension HKQuantitySample {
     /// The OMH data point created from converting this HKQuantitySample
-    public var dataPoint: any DataPoint {
+    public var omhDataPoint: any DataPoint {
         get throws {
             let schema: any Schema
+
+            let timeFrame = TimeFrame(
+                timeInterval: TimeInterval(
+                    startDateTime: DateTime(date: self.startDate),
+                    endDateTime: DateTime(date: self.endDate)
+                )
+            )
+
             switch sampleType {
             case HKQuantityType(.bloodGlucose):
                 schema = BloodGlucose(
-                    bloodGlucose: UnitValue<Double>(
-                        unit: "mg/dL",
+                    bloodGlucose: BloodGlucoseUnitValue(
+                        unit: .milligramsPerDeciliter,
                         value: self.quantity.doubleValue(for: HKUnit(from: "mg/dL"))
                     ),
-                    effectiveTimeFrame: TimeInterval(
-                        startDateTime: self.startDate,
-                        endDateTime: self.endDate
-                    )
+                    effectiveTimeFrame: timeFrame
+                )
+            case HKQuantityType(.bodyFatPercentage):
+                schema = BodyFatPercentage(
+                    bodyFatPercentage: BodyFatPercentageUnitValue(
+                        unit: .percent,
+                        value: self.quantity.doubleValue(for: HKUnit(from: "%"))
+                    ),
+                    effectiveTimeFrame: timeFrame
+                )
+            case HKQuantityType(.bodyMass):
+                schema = BodyWeight(
+                    bodyWeight: MassUnitValue(
+                        unit: .kg,
+                        value: self.quantity.doubleValue(for: HKUnit(from: "kg"))
+                    ), effectiveTimeFrame: timeFrame
+                )
+            case HKQuantityType(.bodyMassIndex):
+                schema = BodyMassIndex(
+                    bodyMassIndex: BodyMassIndexUnitValue(
+                        unit: .kilogramsPerMeterSquared,
+                        value: self.quantity.doubleValue(for: HKUnit.count())
+                    ),
+                    effectiveTimeFrame: timeFrame
+                )
+            case HKQuantityType(.bodyTemperature):
+                schema = BodyTemperature(
+                    bodyTemperature: TemperatureUnitValue(
+                        unit: .C,
+                        value: self.quantity.doubleValue(for: HKUnit(from: "degC"))
+                    ),
+                    effectiveTimeFrame: timeFrame
+                )
+            case HKQuantityType(.heartRate):
+                schema = HeartRate(
+                    heartRate: HeartRateUnitValue(
+                        unit: .beatsPerMinute,
+                        value: self.quantity.doubleValue(for: HKUnit(from: "count/min"))
+                    ),
+                    effectiveTimeFrame: timeFrame
+                )
+            case HKQuantityType(.height):
+                schema = BodyHeight(
+                    bodyHeight: LengthUnitValue(
+                        unit: .cm,
+                        value: self.quantity.doubleValue(for: HKUnit(from: "cm"))
+                    ),
+                    effectiveTimeFrame: timeFrame
+                )
+            case HKQuantityType(.oxygenSaturation):
+                schema = OxygenSaturation(
+                    oxygenSaturation: OxygenSaturationUnitValue(
+                        unit: .percent,
+                        value: self.quantity.doubleValue(for: HKUnit(from: "%"))
+                    ),
+                    effectiveTimeFrame: timeFrame
+                )
+            case HKQuantityType(.respiratoryRate):
+                schema = RespiratoryRate(
+                    respiratoryRate: RespiratoryRateUnitValue(
+                        unit: .breathsPerMinute,
+                        value: self.quantity.doubleValue(for: HKUnit(from: "count/min"))
+                    ),
+                    effectiveTimeFrame: timeFrame
+                )
+            case HKQuantityType(.stepCount):
+                schema = StepCount(
+                    stepCount: StepCountUnitValue(
+                        unit: .steps,
+                        value: self.quantity.doubleValue(for: HKUnit(from: "count"))
+                    ),
+                    effectiveTimeFrame: timeFrame
                 )
             default:
-                return try buildHKQuantityDataPoint()
+                throw HealthKitOnOMHError.notSupported
             }
             
             return createTypedDataPoint(schema)
         }
     }
     
-    
-    private func buildHKQuantityDataPoint() throws -> any DataPoint {
-        var unit = ""
-        switch self.quantityType {
-        case HKQuantityType(.heartRate):
-            unit = "count/min"
-        case HKQuantityType(.bodyMass):
-            unit = "kg"
-        case HKQuantityType(.bodyTemperature):
-            unit = "degC"
-        case HKQuantityType(.height):
-            unit = "m"
-        case HKQuantityType(.oxygenSaturation):
-            unit = "%"
-        case HKQuantityType(.respiratoryRate):
-            unit = "count/min"
-        case HKQuantityType(.stepCount):
-            unit = "count"
-        default:
-            throw HealthKitOnOMHError.notSupported
-        }
-
-        let value = self.quantity.doubleValue(for: HKUnit(from: unit))
-        
-        let sample = HealthKitQuantitySample<Double>(
-            quantityType: self.quantityType.identifier,
-            unitValue: UnitValue<Double>(unit: unit, value: value),
-            effectiveTimeFrame: TimeInterval(
-                startDateTime: self.startDate,
-                endDateTime: self.endDate
-            )
-        )
-
-        return createTypedDataPoint(sample)
-    }
-    
     private func createTypedDataPoint<T: Schema>(_ body: T) -> any DataPoint {
         SchemaDataPoint<T>(
             header: Header(
                 id: self.uuid.uuidString,
-                creationDateTime: Date(),
+                creationDateTime: DateTime(date: Date()),
                 schemaId: type(of: body).schemaId
             ),
             body: body

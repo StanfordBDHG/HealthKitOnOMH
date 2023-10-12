@@ -35,6 +35,12 @@ let package = Package(
             dependencies: [
                 .target(name: "HealthKitOnOMH")
             ]
+        ),
+        .testTarget(
+            name: "OMHModelsTests",
+            dependencies: [
+                .target(name: "OMHModels")
+            ]
         )
     ]
 )

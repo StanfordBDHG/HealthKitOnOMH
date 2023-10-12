@@ -6,16 +6,16 @@
 // SPDX-License-Identifier: MIT
 
 
-/// An enumeration representing different types of stastical measures that can be represented in data points
-public enum DescriptiveStatistic: String, Codable {
-    case average = "average"
-    case count = "count"
-    case maximum = "maximum"
-    case median = "median"
-    case minimum = "minimum"
+/// An enumeration representing different types of statistical measures that can be represented in data points
+public enum DescriptiveStatistic: String, Schema {
+    case average
+    case count
+    case maximum
+    case median
+    case minimum
     case standardDeviation = "standard deviation"
-    case sum = "sum"
-    case variance = "variance"
+    case sum
+    case variance
     case twentiethPercentile = "20th percentile"
     case eightiethPercentile = "80th percentile"
     case lowerQuartile = "lower quartile"
@@ -25,4 +25,7 @@ public enum DescriptiveStatistic: String, Codable {
     case secondQuintile = "2nd quintile"
     case thirdQuintile = "3rd quintile"
     case fourthQuintile = "4th quintile"
+    
+    /// The Open mHealth schema identifier
+    public static let schemaId = SchemaId(namespace: .omh, name: "descriptive-statistic", version: "1.0")
 }

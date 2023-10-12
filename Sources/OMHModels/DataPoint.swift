@@ -8,7 +8,7 @@
 
 /// A protocol for an Open mHealth data point container
 /// Generated from Open mHealth `omh:data-point:1.0` (https://www.openmhealth.org/documentation/#/schema-docs/schema-library/schemas/omh_data-point)
-public protocol DataPoint<Body>: Sendable {
+public protocol DataPoint<Body>: Sendable, Codable {
     associatedtype Body: Schema
     
     

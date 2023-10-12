@@ -34,10 +34,10 @@ final class HealthKitOnOMHTests: XCTestCase {
             end: try endDate
         )
         
-        let omhDataPoint = try XCTUnwrap(heartRateSample.dataPoint as? any DataPoint<HealthKitQuantitySample<Double>>)
+        let omhDataPoint = try XCTUnwrap(heartRateSample.omhDataPoint as? any DataPoint<HeartRate>)
         
-        XCTAssertEqual(120, omhDataPoint.body.unitValue.value)
-        XCTAssertEqual("count/min", omhDataPoint.body.unitValue.unit)
+        XCTAssertEqual(120, omhDataPoint.body.heartRate.value)
+        XCTAssertEqual(HeartRateUnit.beatsPerMinute, omhDataPoint.body.heartRate.unit)
     }
     
     func testBloodGlucose() throws {
@@ -49,9 +49,155 @@ final class HealthKitOnOMHTests: XCTestCase {
             metadata: [HKMetadataKeyBloodGlucoseMealTime: 1]
         )
         
-        let omhDataPoint = try XCTUnwrap(bloodGlucoseSample.dataPoint as? any DataPoint<BloodGlucose>)
+        let omhDataPoint = try XCTUnwrap(bloodGlucoseSample.omhDataPoint as? any DataPoint<BloodGlucose>)
         
         XCTAssertEqual(90, omhDataPoint.body.bloodGlucose.value)
-        XCTAssertEqual("mg/dL", omhDataPoint.body.bloodGlucose.unit)
+        XCTAssertEqual(BloodGlucoseUnit.milligramsPerDeciliter, omhDataPoint.body.bloodGlucose.unit)
+    }
+    
+    func testStepCount() throws {
+        let stepCountSample = HKQuantitySample(
+            type: HKQuantityType(.stepCount),
+            quantity: HKQuantity(unit: HKUnit(from: "count"), doubleValue: 100),
+            start: try startDate,
+            end: try endDate
+        )
+        
+        let omhDataPoint = try XCTUnwrap(stepCountSample.omhDataPoint as? any DataPoint<StepCount>)
+        
+        XCTAssertEqual(100, omhDataPoint.body.stepCount.value)
+        XCTAssertEqual(.steps, omhDataPoint.body.stepCount.unit)
+    }
+
+    func testBodyHeight() throws {
+        let bodyHeightSample = HKQuantitySample(
+            type: HKQuantityType(.height),
+            quantity: HKQuantity(unit: HKUnit(from: "cm"), doubleValue: 180),
+            start: try startDate,
+            end: try endDate
+        )
+
+        let omhDataPoint = try XCTUnwrap(bodyHeightSample.omhDataPoint as? any DataPoint<BodyHeight>)
+
+        XCTAssertEqual(180, omhDataPoint.body.bodyHeight.value)
+        XCTAssertEqual(LengthUnit.cm, omhDataPoint.body.bodyHeight.unit)
+    }
+
+    func testBodyWeight() throws {
+        let bodyWeightSample = HKQuantitySample(
+            type: HKQuantityType(.bodyMass),
+            quantity: HKQuantity(unit: HKUnit(from: "kg"), doubleValue: 100),
+            start: try startDate,
+            end: try endDate
+        )
+
+        let omhDataPoint = try XCTUnwrap(bodyWeightSample.omhDataPoint as? any DataPoint<BodyWeight>)
+
+        XCTAssertEqual(100, omhDataPoint.body.bodyWeight.value)
+        XCTAssertEqual(MassUnit.kg, omhDataPoint.body.bodyWeight.unit)
+    }
+    
+    func testBodyTemperature() throws {
+        let bodyTemperatureSample = HKQuantitySample(
+            type: HKQuantityType(.bodyTemperature),
+            quantity: HKQuantity(unit: .degreeCelsius(), doubleValue: 37),
+            start: try startDate,
+            end: try endDate
+        )
+        
+        let omhDataPoint = try XCTUnwrap(bodyTemperatureSample.omhDataPoint as? any DataPoint<BodyTemperature>)
+        
+        XCTAssertEqual(37, omhDataPoint.body.bodyTemperature.value)
+        XCTAssertEqual(TemperatureUnit.C, omhDataPoint.body.bodyTemperature.unit)
+    }
+    
+    func testRespiratoryRate() throws {
+        let respiratoryRateSample = HKQuantitySample(
+            type: HKQuantityType(.respiratoryRate),
+            quantity: HKQuantity(unit: HKUnit.count().unitDivided(by: .minute()), doubleValue: 20),
+            start: try startDate,
+            end: try endDate
+        )
+        
+        let omhDataPoint = try XCTUnwrap(respiratoryRateSample.omhDataPoint as? any DataPoint<RespiratoryRate>)
+        
+        XCTAssertEqual(20, omhDataPoint.body.respiratoryRate.value)
+        XCTAssertEqual(RespiratoryRateUnit.breathsPerMinute, omhDataPoint.body.respiratoryRate.unit)
+    }
+    
+    func testOxygenSaturation() throws {
+        let oxygenSaturationSample = HKQuantitySample(
+            type: HKQuantityType(.oxygenSaturation),
+            quantity: HKQuantity(unit: HKUnit.percent(), doubleValue: 99),
+            start: try startDate,
+            end: try endDate
+        )
+        
+        let omhDataPoint = try XCTUnwrap(oxygenSaturationSample.omhDataPoint as? any DataPoint<OxygenSaturation>)
+        
+        XCTAssertEqual(99, omhDataPoint.body.oxygenSaturation.value)
+        XCTAssertEqual(OxygenSaturationUnit.percent, omhDataPoint.body.oxygenSaturation.unit)
+    }
+    
+    func testBodyFatPercentage() throws {
+        let bodyFatPercentageSample = HKQuantitySample(
+            type: HKQuantityType(.bodyFatPercentage),
+            quantity: HKQuantity(unit: HKUnit.percent(), doubleValue: 16),
+            start: try startDate,
+            end: try endDate
+        )
+        
+        let omhDataPoint = try XCTUnwrap(bodyFatPercentageSample.omhDataPoint as? any DataPoint<BodyFatPercentage>)
+        
+        XCTAssertEqual(16, omhDataPoint.body.bodyFatPercentage.value)
+        XCTAssertEqual(BodyFatPercentageUnit.percent, omhDataPoint.body.bodyFatPercentage.unit)
+    }
+    
+    func testBodyMassIndex() throws {
+        let bodyMassIndexSample = HKQuantitySample(
+            type: HKQuantityType(.bodyMassIndex),
+            quantity: HKQuantity(unit: HKUnit.count(), doubleValue: 22.5),
+            start: try startDate,
+            end: try endDate
+        )
+        
+        let omhDataPoint = try XCTUnwrap(bodyMassIndexSample.omhDataPoint as? any DataPoint<BodyMassIndex>)
+        
+        XCTAssertEqual(22.5, omhDataPoint.body.bodyMassIndex.value)
+        XCTAssertEqual(BodyMassIndexUnit.kilogramsPerMeterSquared, omhDataPoint.body.bodyMassIndex.unit)
+    }
+    
+    func testUnsupportedQuantityType() throws {
+        let sample = HKQuantitySample(
+            type: HKQuantityType(.nikeFuel),
+            quantity: HKQuantity(unit: .count(), doubleValue: 1),
+            start: try startDate,
+            end: try endDate
+        )
+        
+        XCTAssertThrowsError(try sample.omhDataPoint) { error in
+            XCTAssertEqual(error as? HealthKitOnOMHError, HealthKitOnOMHError.notSupported)
+        }
+    }
+
+    func testEncoding() throws {
+        let date = ISO8601DateFormatter().date(from: "1885-11-11T00:00:00-08:00") ?? .now
+        let sample = HKQuantitySample(
+            type: HKQuantityType(.heartRate),
+            quantity: HKQuantity(unit: HKUnit.count().unitDivided(by: .minute()), doubleValue: 42.0),
+            start: date,
+            end: date
+        )
+        
+        let omhDataPoint = try XCTUnwrap(sample.omhDataPoint as? any DataPoint<HeartRate>)
+        
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = [.prettyPrinted, .withoutEscapingSlashes, .sortedKeys]
+        encoder.keyEncodingStrategy = .convertToSnakeCase
+        
+        let data = try encoder.encode(omhDataPoint)
+        
+        let json = String(decoding: data, as: UTF8.self)
+        print(json)
     }
 }
