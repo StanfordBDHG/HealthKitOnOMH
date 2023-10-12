@@ -47,6 +47,14 @@ extension HKQuantitySample {
                         value: self.quantity.doubleValue(for: HKUnit(from: "kg"))
                     ), effectiveTimeFrame: timeFrame
                 )
+            case HKQuantityType(.bodyMassIndex):
+                schema = BodyMassIndex(
+                    bodyMassIndex: BodyMassIndexUnitValue(
+                        unit: .kilogramsPerMeterSquared,
+                        value: self.quantity.doubleValue(for: HKUnit.count())
+                    ),
+                    effectiveTimeFrame: timeFrame
+                )
             case HKQuantityType(.bodyTemperature):
                 schema = BodyTemperature(
                     bodyTemperature: TemperatureUnitValue(

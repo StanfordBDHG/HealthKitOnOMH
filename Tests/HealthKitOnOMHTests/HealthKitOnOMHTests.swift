@@ -143,7 +143,7 @@ final class HealthKitOnOMHTests: XCTestCase {
         let bodyFatPercentageSample = HKQuantitySample(
             type: HKQuantityType(.bodyFatPercentage),
             quantity: HKQuantity(unit: HKUnit.percent(), doubleValue: 16),
-            start: try endDate,
+            start: try startDate,
             end: try endDate
         )
         
@@ -153,6 +153,20 @@ final class HealthKitOnOMHTests: XCTestCase {
         XCTAssertEqual(BodyFatPercentageUnit.percent, omhDataPoint.body.bodyFatPercentage.unit)
     }
     
+    func testBodyMassIndex() throws {
+        let bodyMassIndexSample = HKQuantitySample(
+            type: HKQuantityType(.bodyMassIndex),
+            quantity: HKQuantity(unit: HKUnit.count(), doubleValue: 22.5),
+            start: try startDate,
+            end: try endDate
+        )
+        
+        let omhDataPoint = try XCTUnwrap(bodyMassIndexSample.omhDataPoint as? any DataPoint<BodyMassIndex>)
+        
+        XCTAssertEqual(22.5, omhDataPoint.body.bodyMassIndex.value)
+        XCTAssertEqual(BodyMassIndexUnit.kilogramsPerMeterSquared, omhDataPoint.body.bodyMassIndex.unit)
+    }
+
     func testEncoding() throws {
         let date = ISO8601DateFormatter().date(from: "1885-11-11T00:00:00-08:00") ?? .now
         let sample = HKQuantitySample(

@@ -117,6 +117,7 @@ The above code will produce the following JSON in conformance with Open mHealth'
 | HKQuantityTypeIdentifierBloodGlucose | :white_check_mark: | [omh:blood-glucose:3.x](http://www.openmhealth.org/documentation/#/schema-docs/schema-library/schemas/omh_blood-glucose) |
 | HKQuantityTypeIdentifierBodyFatPercentage | :white_check_mark: | [omh:body-fat-percentage:1.x](http://www.openmhealth.org/documentation/#/schema-docs/schema-library/schemas/omh_body-fat-percentage) |
 | HKQuantityTypeIdentifierBodyMass | :white_check_mark: | [omh:body-weight:2.x](http://www.openmhealth.org/documentation/#/schema-docs/schema-library/schemas/omh_body-weight) |
+| HKQuantityTypeIdentifierBodyMassIndex | :white_check_mark: | [omh:body-mass-index:1.x](http://www.openmhealth.org/documentation/#/schema-docs/schema-library/schemas/omh_body-mass-index) |
 | HKQuantityTypeIdentifierBodyTemperature | :white_check_mark: | [omh:body-temperature:3.x](http://www.openmhealth.org/documentation/#/schema-docs/schema-library/schemas/omh_body-temperature) |
 | HKQuantityTypeIdentifierHeartRate | :white_check_mark: | [omh:heart-rate:2.x](http://www.openmhealth.org/documentation/#/schema-docs/schema-library/schemas/omh_heart-rate) |
 | HKQuantityTypeIdentifierHeight | :white_check_mark: | [omh:body-height:1.x](http://www.openmhealth.org/documentation/#/schema-docs/schema-library/schemas/omh_body-height) |

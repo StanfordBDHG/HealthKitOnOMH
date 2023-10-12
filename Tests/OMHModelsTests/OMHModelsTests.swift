@@ -200,4 +200,13 @@ final class OMHModelsTests: XCTestCase {
         XCTAssertEqual(bodyFatPercentage.bodyFatPercentage.value, 16)
         XCTAssertEqual(bodyFatPercentage.bodyFatPercentage.unit, .percent)
     }
+    
+    func testBodyMassIndex() throws {
+        let bodyMassIndex = BodyMassIndex(
+            bodyMassIndex: BodyMassIndexUnitValue(unit: .kilogramsPerMeterSquared, value: 22.5), effectiveTimeFrame: try timeFrame
+        )
+        
+        XCTAssertEqual(bodyMassIndex.bodyMassIndex.value, 22.5)
+        XCTAssertEqual(bodyMassIndex.bodyMassIndex.unit, .kilogramsPerMeterSquared)
+    }
 }
