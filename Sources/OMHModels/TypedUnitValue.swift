@@ -11,6 +11,8 @@ import Foundation
 public protocol UnitProtocol: Codable, Sendable {
 }
 
+/// A numerical value with a unit of measure
+/// Generated from IEEE 1752.1 `unit-value-1.0` (https://w3id.org/ieee/ieee-1752-schema/unit-value.json)
 public struct TypedUnitValue<T: UnitProtocol>: Codable, Sendable {
     private enum CodingKeys: String, CodingKey {
         case unit, value
