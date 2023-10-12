@@ -108,6 +108,24 @@ The above code will produce the following JSON in conformance with Open mHealth'
 }
 ```
 
+## Supported Types
+
+|HKQuantityType|Supported|Open mHealth schema|
+|-------------|:---------:|-------------|
+| HKQuantityTypeIdentifierBodyTemperature | :white_check_mark: | [omh:body-temperature:3.x](http://www.openmhealth.org/documentation/#/schema-docs/schema-library/schemas/omh_body-temperature) |
+| HKCorrelationTypeIdentifierBloodPressure | :white_check_mark: | [omh:blood-pressure:3.x](http://www.openmhealth.org/documentation/#/schema-docs/schema-library/schemas/omh_blood-pressure) |
+| HKQuantityTypeIdentifierBloodGlucose | :white_check_mark: | [omh:blood-glucose:3.x](http://www.openmhealth.org/documentation/#/schema-docs/schema-library/schemas/omh_blood-glucose) |
+| HKQuantityTypeIdentifierBodyFatPercentage | :white_check_mark: | [omh:body-fat-percentage:1.x](http://www.openmhealth.org/documentation/#/schema-docs/schema-library/schemas/omh_body-fat-percentage) |
+| HKQuantityTypeIdentifierBodyMass | :white_check_mark: | [omh:body-weight:2.x](http://www.openmhealth.org/documentation/#/schema-docs/schema-library/schemas/omh_body-weight) |
+| HKQuantityTypeIdentifierBodyTemperature | :white_check_mark: | [omh:body-temperature:3.x](http://www.openmhealth.org/documentation/#/schema-docs/schema-library/schemas/omh_body-temperature) |
+| HKQuantityTypeIdentifierHeartRate | :white_check_mark: | [omh:heart-rate:2.x](http://www.openmhealth.org/documentation/#/schema-docs/schema-library/schemas/omh_heart-rate) |
+| HKQuantityTypeIdentifierHeight | :white_check_mark: | [omh:body-height:1.x](http://www.openmhealth.org/documentation/#/schema-docs/schema-library/schemas/omh_body-height) |
+| HKQuantityTypeIdentifierOxygenSaturation | :white_check_mark: | [omh:oxygen-saturation:2.x](http://www.openmhealth.org/documentation/#/schema-docs/schema-library/schemas/omh_oxygen-saturation) |
+| HKQuantityTypeIdentifierRespiratoryRate | :white_check_mark: | [omh:respiratory-rate:2.x](http://www.openmhealth.org/documentation/#/schema-docs/schema-library/schemas/omh_respiratory-rate) |
+| HKQuantityTypeIdentifierStepCount | :white_check_mark: | [omh:step-count:3.x](http://www.openmhealth.org/documentation/#/schema-docs/schema-library/schemas/omh_step-count) |
+
+
+
 ## License
 This project is licensed under the MIT License. See [Licenses](https://github.com/StanfordBDHG/HealthKitOnOMH/tree/main/LICENSES) for more information.
 
