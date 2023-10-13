@@ -29,7 +29,8 @@ public struct Header: Codable, Sendable {
     /// References to external documentation
     public var externalDatasheets: [ExternalDataSheet]
 
-    
+    // swiftlint:disable function_default_parameter_at_end
+    // We disable this rule because the parameter order is based on the schema.
     public init (
         uuid: String = UUID().uuidString,
         sourceCreationDateTime: DateTime,

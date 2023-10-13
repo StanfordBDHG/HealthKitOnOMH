@@ -17,6 +17,8 @@ public struct ExternalDataSheet: Codable, Sendable {
     public var datasheetReference: String
     
     
+    // swiftlint:disable function_default_parameter_at_end
+    // We disable this rule because the parameter order is based on the schema.
     public init(
         datasheetType: String? = nil,
         datasheetReference: String
