@@ -21,6 +21,7 @@ public struct TypedUnitValue<T: UnitProtocol>: Codable, Sendable {
     public var unit: T
     public var value: Double
 
+    
     public init(unit: T, value: Double) {
         self.unit = unit
         self.value = value

@@ -114,8 +114,8 @@ extension HKQuantitySample {
     private func createTypedDataPoint<T: Schema>(_ body: T) -> any DataPoint {
         SchemaDataPoint<T>(
             header: Header(
-                id: self.uuid.uuidString,
-                creationDateTime: DateTime(date: Date()),
+                uuid: self.uuid.uuidString,
+                sourceCreationDateTime: DateTime(date: Date()),
                 schemaId: type(of: body).schemaId
             ),
             body: body
