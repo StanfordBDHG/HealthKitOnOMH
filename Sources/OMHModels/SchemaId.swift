@@ -32,9 +32,8 @@ public struct SchemaId: Sendable, Codable, Equatable {
     }
     
     public static func == (lhs: SchemaId, rhs: SchemaId) -> Bool {
-        return lhs.namespace == rhs.namespace &&
-               lhs.name == rhs.name &&
-               lhs.version == rhs.version
+        lhs.namespace == rhs.namespace &&
+        lhs.name == rhs.name &&
+        lhs.version == rhs.version
     }
 }
-
