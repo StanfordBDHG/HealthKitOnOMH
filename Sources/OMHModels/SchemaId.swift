@@ -10,7 +10,7 @@ import Foundation
 
 /// A schema identifier
 /// Generated from IEEE 1752.1`schema-id-1.0` (https://w3id.org/ieee/ieee-1752-schema/schema-id.json)
-public struct SchemaId: Sendable, Codable {
+public struct SchemaId: Sendable, Codable, Equatable {
     /// The namespace of the schema. A namespace serves to disambiguate schemas with conflicting names.
     public var namespace: SchemaNamespace
 
@@ -30,4 +30,11 @@ public struct SchemaId: Sendable, Codable {
         self.name = name
         self.version = version
     }
+    
+    public static func == (lhs: SchemaId, rhs: SchemaId) -> Bool {
+        return lhs.namespace == rhs.namespace &&
+               lhs.name == rhs.name &&
+               lhs.version == rhs.version
+    }
 }
+
