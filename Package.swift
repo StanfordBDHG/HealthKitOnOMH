@@ -1,4 +1,4 @@
-// swift-tools-version:5.7
+// swift-tools-version:5.8
 
 //
 // This source file is part of the HealthKitOnOMH open source project
@@ -17,29 +17,22 @@ let package = Package(
         .iOS(.v16)
     ],
     products: [
-        .library(name: "HealthKitOnOMH", targets: ["HealthKitOnOMH"]),
-        .library(name: "OMHModels", targets: ["OMHModels"])
+        .library(name: "HealthKitOnOMH", targets: ["HealthKitOnOMH"])
+    ],
+    dependencies: [
+        .package(url: "https://github.com/StanfordBDHG/OMHModels.git", .upToNextMajor(from: "0.1.0"))
     ],
     targets: [
         .target(
             name: "HealthKitOnOMH",
             dependencies: [
-                .target(name: "OMHModels")
+                .product(name: "OMHModels", package: "OMHModels")
             ]
-        ),
-        .target(
-            name: "OMHModels"
         ),
         .testTarget(
             name: "HealthKitOnOMHTests",
             dependencies: [
                 .target(name: "HealthKitOnOMH")
-            ]
-        ),
-        .testTarget(
-            name: "OMHModelsTests",
-            dependencies: [
-                .target(name: "OMHModels")
             ]
         )
     ]
