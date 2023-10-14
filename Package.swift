@@ -18,7 +18,9 @@ let package = Package(
     ],
     products: [
         .library(name: "HealthKitOnOMH", targets: ["HealthKitOnOMH"]),
-        .library(name: "OMHModels", targets: ["OMHModels"])
+    ],
+    dependencies: [
+        .package(url: "https://github.com/StanfordBDHG/OMHModels.git", .upToNextMajor(from: "0.1.0"))
     ],
     targets: [
         .target(
@@ -27,19 +29,10 @@ let package = Package(
                 .target(name: "OMHModels")
             ]
         ),
-        .target(
-            name: "OMHModels"
-        ),
         .testTarget(
             name: "HealthKitOnOMHTests",
             dependencies: [
                 .target(name: "HealthKitOnOMH")
-            ]
-        ),
-        .testTarget(
-            name: "OMHModelsTests",
-            dependencies: [
-                .target(name: "OMHModels")
             ]
         )
     ]
