@@ -8,10 +8,10 @@
 import Foundation
 
 
-/// Generated from Open mHealth `omh:date-time:1.0` (https://www.openmhealth.org/documentation/#/schema-docs/schema-library/schemas/omh_date-time)
+/// Generated from IEEE 1752.1 `date-time-1.0` (https://w3id.org/ieee/ieee-1752-schema/date-time.json)
 public struct DateTime: Schema, Equatable {
     /// The Open mHealth schema identifier
-    public static let schemaId = SchemaId(namespace: .omh, name: "date-time", version: "1.0")
+    public static let schemaId = SchemaId(namespace: .ieee, name: "date-time", version: "1.0")
     
     private static let formatter: ISO8601DateFormatter = {
         let formatter = ISO8601DateFormatter()

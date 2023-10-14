@@ -110,7 +110,7 @@ The above code will produce the following JSON in conformance with Open mHealth'
 
 ## Supported Types
 
-|HKQuantityType|Supported|Open mHealth schema|
+|HKQuantityType|Supported|Open mHealth / IEEE 1752 schema|
 |-------------|:---------:|-------------|
 | HKQuantityTypeIdentifierBodyTemperature | :white_check_mark: | [omh:body-temperature:3.x](http://www.openmhealth.org/documentation/#/schema-docs/schema-library/schemas/omh_body-temperature) |
 | HKCorrelationTypeIdentifierBloodPressure | :white_check_mark: | [omh:blood-pressure:3.x](http://www.openmhealth.org/documentation/#/schema-docs/schema-library/schemas/omh_blood-pressure) |

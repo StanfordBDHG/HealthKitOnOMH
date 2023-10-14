@@ -9,6 +9,7 @@ import Foundation
 
 
 /// A type representing a value paired with a unit specific to length measurements
+/// Generated from IEEE 1752.1 `length-unit-value-1.0` (https://w3id.org/ieee/ieee-1752-schema/length-unit-value.json)
 public typealias LengthUnitValue = TypedUnitValue<LengthUnit>
 
 public enum LengthUnit: String, UnitProtocol {
