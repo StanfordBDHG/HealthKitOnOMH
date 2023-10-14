@@ -26,7 +26,7 @@ let package = Package(
         .target(
             name: "HealthKitOnOMH",
             dependencies: [
-                .target(name: "OMHModels")
+                .product(name: "OMHModels", package: "OMHModels")
             ]
         ),
         .testTarget(
