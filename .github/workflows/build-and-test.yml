@@ -16,29 +16,15 @@ on:
   workflow_dispatch:
 
 jobs:
-  build_and_test-spm:
-    name: Build and Test Swift Package
-    uses: StanfordBDHG/.github/.github/workflows/build-and-test-xcodebuild-spm.yml@v1
+  packageios:
+    name: Build and Test Swift Package iOS
+    uses: StanfordBDHG/.github/.github/workflows/xcodebuild-or-fastlane.yml@v2
     with:
-      scheme: HealthKitOnOMH-Package
-  create-and-upload-coverage-report:
-    name: Create and Upload Coverage Report
-    needs: build_and_test-spm
-    runs-on: macos-12
-    steps:
-    - uses: actions/checkout@v3
-    - uses: maxim-lobanov/setup-xcode@v1
-      with:
-        xcode-version: latest-stable
-    - name: Check Environment
-      run: |
-          xcodebuild -version
-          swift --version
-    - uses: actions/download-artifact@v3
-    - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v3
-      with:
-        fail_ci_if_error: true
-        token: ${{ secrets.CODECOV_TOKEN }}
-        xcode: true
-        xcode_archive_path: HealthKitOnOMH-Package.xcresult
+      scheme: HealthKitOnOMH
+      artifactname: HealthKitOnOMH.xcresult
+  uploadcoveragereport:
+    name: Upload Coverage Report
+    needs: packageios
+    uses: StanfordBDHG/.github/.github/workflows/create-and-upload-coverage-report.yml@v2
+    with:
+      coveragereports: HealthKitOnOMH.xcresult
