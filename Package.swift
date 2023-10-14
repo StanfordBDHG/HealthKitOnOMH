@@ -17,7 +17,7 @@ let package = Package(
         .iOS(.v16)
     ],
     products: [
-        .library(name: "HealthKitOnOMH", targets: ["HealthKitOnOMH"]),
+        .library(name: "HealthKitOnOMH", targets: ["HealthKitOnOMH"])
     ],
     dependencies: [
         .package(url: "https://github.com/StanfordBDHG/OMHModels.git", .upToNextMajor(from: "0.1.0"))
