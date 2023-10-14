@@ -5,8 +5,9 @@
 //
 // SPDX-License-Identifier: MIT
 
+
 import Foundation
 
 
-/// Generated from IEEE 1752.1 `duration-unit-value-range:1.0` (https://w3id.org/ieee/ieee-1752-schema/duration-unit-value-range.json)
-public typealias DurationUnitValueRange = TypedUnitValueRange<TimeUnit>
+public protocol UnitProtocol: Codable, Sendable {
+}

@@ -8,9 +8,10 @@
 import Foundation
 
 
-public enum TimeWindow: Codable {
+public enum TimeWindow: Codable, Equatable {
     case duration(DurationUnitValue)
     case durationRange(DurationUnitValueRange)
+    
     
     public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
@@ -20,6 +21,17 @@ public enum TimeWindow: Codable {
             self = .durationRange(durationRange)
         } else {
             throw DecodingError.dataCorruptedError(in: container, debugDescription: "Mismatched Types")
+        }
+    }
+    
+    public static func == (lhs: TimeWindow, rhs: TimeWindow) -> Bool {
+        switch (lhs, rhs) {
+        case let (.duration(lhsDuration), .duration(rhsDuration)):
+            return lhsDuration == rhsDuration
+        case let (.durationRange(lhsRange), .durationRange(rhsRange)):
+            return lhsRange == rhsRange
+        default:
+            return false
         }
     }
     
