@@ -12,6 +12,8 @@ SPDX-License-Identifier: MIT
 
 [![Build and Test](https://github.com/StanfordBDHG/HealthKitOnOMH/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/StanfordBDHG/HealthKitOnOMH/actions/workflows/build-and-test.yml)
 [![codecov](https://codecov.io/gh/StanfordBDHG/HealthKitOnOMH/branch/main/graph/badge.svg?token=17BMMYE3AC)](https://codecov.io/gh/StanfordBDHG/HealthKitOnOMH)
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FStanfordBDHG%2FHealthKitOnOMH%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/StanfordBDHG/HealthKitOnOMH)
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2FStanfordBDHG%2FHealthKitOnOMH%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/StanfordBDHG/HealthKitOnOMH)
 
 
 The HealthKitonOMH library provides extensions that convert supported HealthKit samples into corresponding [IEEE Standard 1752.1](https://opensource.ieee.org/omh/1752) and [Open mHealth (OMH)](https://www.openmhealth.org/documentation/#/overview/get-started) schemas.
