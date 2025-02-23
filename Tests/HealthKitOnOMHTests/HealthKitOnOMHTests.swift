@@ -6,9 +6,9 @@
 // SPDX-License-Identifier: MIT
 //
 
-import Testing
 import HealthKit
 @testable import HealthKitOnOMH
+import Testing
 
 @Suite("HealthKitOnOMH Tests")
 struct HealthKitOnOMHTests {
